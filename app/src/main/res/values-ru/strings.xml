@@ -10,5 +10,10 @@
     <string name="content_description_end_icon">Показать пароль</string>
     <string name="email_input_error">Неверный адрес электронной почты</string>
     <string name="password_input_error">Минимальная длина пароля должна быть 5 символов.</string>
-    <string name="settings">Settings</string>
+    <string name="settings">Настройки</string>
+    <string name="action_favorite">Tikets</string>
+
+
+
+
 </resources>

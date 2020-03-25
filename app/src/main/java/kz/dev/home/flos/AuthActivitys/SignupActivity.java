@@ -16,7 +16,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
-import kz.dev.home.flos.ContentActivitys.HomeActivity;
 import kz.dev.home.flos.MainActivity;
 import kz.dev.home.flos.R;
 import kz.dev.home.flos.SupportClases.WebReq;

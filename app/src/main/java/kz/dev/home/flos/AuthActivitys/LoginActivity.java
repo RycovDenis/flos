@@ -7,16 +7,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -26,7 +23,6 @@ import org.json.JSONObject;
 import java.util.Objects;
 
 import cz.msebera.android.httpclient.Header;
-import kz.dev.home.flos.ContentActivitys.HomeActivity;
 import kz.dev.home.flos.MainActivity;
 import kz.dev.home.flos.R;
 import kz.dev.home.flos.SupportClases.WebReq;
@@ -35,8 +31,6 @@ import static kz.dev.home.flos.SupportClases.GlobalClass.API_SIGNIN;
 
 public class LoginActivity extends MainActivity {
     TextInputEditText emailEt,passwordEt;
-    RelativeLayout rvLoginLayout;
-    TextInputLayout usernameLayout, passwordLayout;
     Button loginBtn;
     TextView signupNowTv;
     String email,password;
@@ -73,10 +67,7 @@ public class LoginActivity extends MainActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void loginValidation() {
-        rvLoginLayout = findViewById(R.id.rvLoginLayout);
         progressBar = findViewById(R.id.progressBar);
-        rvLoginLayout.setVisibility(View.GONE);
-        progressBar.setVisibility(View.VISIBLE);
         email = Objects.requireNonNull(emailEt.getText()).toString();
         password = Objects.requireNonNull(passwordEt.getText()).toString();
 
