@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Первая линия поддержки</string>
+    <string name="login_button">Войти</string>
+    <string name="loginTextEmail">Login</string>
+    <string name="don_t_have_an_acccount_signup_now">У вас нет аккаунта? Зарегистрироваться сейчас?</string>
+    <string name="aaaa">AAAA</string>
+    <string name="Usernamelabel">E-Mail логин</string>
+    <string name="Passwordlabel">Пароль</string>
+    <string name="content_description_end_icon">Показать пароль</string>
+    <string name="email_input_error">Неверный адрес электронной почты</string>
+    <string name="password_input_error">Минимальная длина пароля должна быть 5 символов.</string>
+    <string name="settings">Settings</string>
+</resources>

@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">First Line of Support</string>
+    <string name="login_button">Login</string>
+    <string name="loginTextEmail">Login</string>
+    <string name="don_t_have_an_acccount_signup_now">Don\'t have an acccount? Signup Now?</string>
+    <string name="aaaa">AAAA</string>
+    <string name="Usernamelabel">E-Mail login</string>
+    <string name="Passwordlabel">Password</string>
+    <string name="content_description_end_icon">Show password symbols</string>
+    <string name="email_input_error">Invalid Email Address</string>
+    <string name="password_input_error">Minimum password length should be 5 characters.</string>
+    <string name="settings">Settings</string>
+</resources>
