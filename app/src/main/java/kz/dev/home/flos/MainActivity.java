@@ -8,8 +8,15 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.loopj.android.http.ResponseHandlerInterface;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import kz.dev.home.flos.AuthActivitys.LoginActivity;
+import kz.dev.home.flos.SupportClases.WebReq;
+
+import static kz.dev.home.flos.SupportClases.GlobalClass.API_SIGNIN;
 
 public class MainActivity extends AppCompatActivity {
     public Context context;
@@ -24,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void logout(){
+        WebReq.post(context, API_SIGNIN, params, new MainActivity.ResponseHandler());
         sharedPrefEditor.putBoolean("login",false);
         sharedPrefEditor.apply();
         sharedPrefEditor.commit();
@@ -49,5 +57,8 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public class ResponseHandler implements ResponseHandlerInterface {
     }
 }
