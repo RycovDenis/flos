@@ -28,13 +28,14 @@ import java.util.Objects;
 
 import kz.dev.home.flos.AuthActivitys.LoginActivity;
 import kz.dev.home.flos.MainActivity;
+import kz.dev.home.flos.NewTicketActivity;
 import kz.dev.home.flos.R;
 
 @SuppressLint("Registered")
 public class HomeActivity extends MainActivity {
     TextView nameTv;
     TextView emailTv;
-    Button logoutbtn,profilebtn;
+    Button logoutbtn,profilebtn,newTiBtn;
     DrawerLayout mDrawer;
     Toolbar toolbar;
     NavigationView nvDrawer;
@@ -56,6 +57,7 @@ public class HomeActivity extends MainActivity {
 
         logoutbtn = findViewById(R.id.logoutBtn);
         profilebtn = findViewById(R.id.profileBtn);
+        newTiBtn = findViewById(R.id.newTiBtn);
 
 
         logoutbtn.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +77,17 @@ public class HomeActivity extends MainActivity {
             public void onClick(View view) {
                 // Redirect back to login page
                 intent = new Intent(context, ProfileActivity.class);
+                //remove all previous stack activities
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
+        newTiBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Redirect back to login page
+                intent = new Intent(context, NewTicketActivity.class);
                 //remove all previous stack activities
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);

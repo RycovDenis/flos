@@ -27,5 +27,16 @@
         android:text="Profile"
         android:textAllCaps="false"
         android:textColor="#FFFFFF" />
+    <Button
+        android:id="@+id/newTiBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profileBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:background="#fa0e3d"
+        android:text="NEW TICKET"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF" />
 
 </RelativeLayout>

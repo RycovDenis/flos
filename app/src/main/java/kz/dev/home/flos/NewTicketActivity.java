@@ -1,4 +1,4 @@
-package kz.dev.home.flos.AuthActivitys;
+package kz.dev.home.flos;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -17,14 +17,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
+import kz.dev.home.flos.AuthActivitys.SignupActivity;
 import kz.dev.home.flos.ContentActivitys.HomeActivity;
-import kz.dev.home.flos.MainActivity;
-import kz.dev.home.flos.R;
 import kz.dev.home.flos.SupportClases.WebReq;
 
 import static kz.dev.home.flos.SupportClases.GlobalClass.API_SIGNUP;
 
-public class SignupActivity extends MainActivity {
+@SuppressLint("Registered")
+public class NewTicketActivity extends MainActivity {
     EditText nameEt,emailEt,passwordEt;
     Button signupBtn;
     TextView LoginNowTv;
@@ -42,7 +42,7 @@ public class SignupActivity extends MainActivity {
     @SuppressLint("CutPasteId")
     public void getViews() {
         nameEt = findViewById(R.id.nameEt);
-        emailEt = findViewById(R.id.emailEt);
+        emailEt = findViewById(R.id.nameEt);
         passwordEt = findViewById(R.id.passwordEt);
         signupBtn = findViewById(R.id.SignupBtn);
         LoginNowTv = findViewById(R.id.LoginNowTv);
@@ -63,34 +63,17 @@ public class SignupActivity extends MainActivity {
     private void signupValidation() {
         name = nameEt.getText().toString();
         email = emailEt.getText().toString();
+        email = sharedPreferences.getString("email","");
         password = passwordEt.getText().toString();
-
-        if (name.length()<3){
-            Toast.makeText(context,"Name at least 3 characters.",Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (email.length()==0){
-            Toast.makeText(context,"Invalid Email Address",Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (!isEmailValid(email)){
-            Toast.makeText(context,"Invalid Email Address",Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (password.length()<5){
-            Toast.makeText(context,"Minimum password length should be 5 characters.",Toast.LENGTH_SHORT).show();
-            return;
-        }
 
         //all inputs are validated now perform login request
         RequestParams params = new RequestParams();
-//        params.add("type","signup");
-        params.add("username",name);
-        params.add("email",email);
-        params.add("password",password);
-
-        WebReq.post(context, API_SIGNUP, params, new SignupActivity.ResponseHandler());
+//        params.add("email","email");
+//        params.add("UserPhone","userPhone");
+//        params.add("ticketTitle","ticketTitle");
+//        params.add("ticketPriority","ticketPriority");
+//        params.add("TicketDesc","TicketDesc");
+        WebReq.post(context, API_SIGNUP, params, new NewTicketActivity.ResponseHandler());
     }
 
     private class ResponseHandler extends JsonHttpResponseHandler {
