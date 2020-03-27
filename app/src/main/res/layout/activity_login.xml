@@ -20,22 +20,7 @@
         android:id="@+id/rvLoginLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/titleTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="189dp"
-        android:layout_marginLeft="189dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="185dp"
-        android:layout_marginRight="185dp"
-        android:text="@string/loginTextEmail" />
-
-    <ImageView
+        <ImageView
         android:id="@+id/imageView"
         android:layout_width="197dp"
         android:layout_height="wrap_content"
@@ -49,18 +34,16 @@
         android:layout_marginTop="74dp"
         android:layout_marginEnd="110dp"
         android:layout_marginRight="110dp"
-        android:layout_marginBottom="10dp"
         android:contentDescription="@string/app_name"
         android:src="@drawable/project_logo" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/usernameLayout"
+        android:id="@+id/EmailLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="395dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:hint="@string/Usernamelabel"
         android:orientation="vertical"
@@ -71,7 +54,7 @@
 
 
     <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/emailEt"
+            android:id="@+id/nameEt"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:ems="11"
@@ -83,8 +66,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/usernameLayout"
-        android:layout_marginTop="10dp"
+        android:layout_below="@+id/EmailLayout"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:hint="@string/Passwordlabel"
@@ -108,13 +90,13 @@
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/passwordLayout"
+        android:layout_below="@+id/signupNowTv"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="60dp"
         android:fontFamily="sans-serif"
         android:gravity="center"
@@ -123,7 +105,6 @@
         android:textColor="@android:color/white"
         android:textSize="11pt"
         app:backgroundTint="@color/colorAccent"
-        app:elevation="2dp"
         app:icon="@drawable/ic_perm_identity_black_24dp"
         app:rippleColor="?attr/colorOnPrimary"
         app:shapeAppearance="?attr/shapeAppearanceSmallComponent" />
@@ -139,7 +120,7 @@
         android:gravity="right"
         android:padding="5dp"
         android:text="@string/don_t_have_an_acccount_signup_now"
-        android:textColor="@color/colorPrimaryLight" />
+        android:textColor="@color/colorPrimary" />
 
     </RelativeLayout>
 </RelativeLayout>

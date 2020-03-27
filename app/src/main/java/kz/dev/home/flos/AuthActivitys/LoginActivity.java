@@ -1,6 +1,7 @@
 package kz.dev.home.flos.AuthActivitys;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import org.json.JSONObject;
 import java.util.Objects;
 
 import cz.msebera.android.httpclient.Header;
+import kz.dev.home.flos.ContentActivitys.HomeActivity;
 import kz.dev.home.flos.MainActivity;
 import kz.dev.home.flos.R;
 import kz.dev.home.flos.SupportClases.WebReq;
@@ -45,7 +47,7 @@ public class LoginActivity extends MainActivity {
     }
 
     private void getViews() {
-        emailEt = findViewById(R.id.emailEt);
+        emailEt = findViewById(R.id.nameEt);
         signupNowTv = findViewById(R.id.signupNowTv);
         passwordEt = findViewById(R.id.passwordEt);
         loginBtn = findViewById(R.id.loginBtn);
@@ -110,6 +112,7 @@ public class LoginActivity extends MainActivity {
             super.onStart();
         }
 
+        @TargetApi(Build.VERSION_CODES.GINGERBREAD)
         @Override
         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
             super.onSuccess(statusCode, headers, response);
@@ -124,8 +127,20 @@ public class LoginActivity extends MainActivity {
                     //save login values
                     sharedPrefEditor.putBoolean("login",true);
                     sharedPrefEditor.putString("id",user.getString("id"));
-                    sharedPrefEditor.putString("username",user.getString("username"));
+                    sharedPrefEditor.putString("role",user.getString("role_name"));
+                    sharedPrefEditor.putString("status",user.getString("status"));
+                    sharedPrefEditor.putString("user_id",user.getString("user_id"));
                     sharedPrefEditor.putString("email",user.getString("email"));
+                    sharedPrefEditor.putString("f_name",user.getString("f_name"));
+                    sharedPrefEditor.putString("l_name",user.getString("l_name"));
+                    sharedPrefEditor.putString("m_name",user.getString("m_name"));
+                    sharedPrefEditor.putString("inn",user.getString("inn"));
+                    sharedPrefEditor.putString("mobile_phone",user.getString("mobile_phone"));
+                    sharedPrefEditor.putString("ip",user.getString("INET_NTOA(ip)"));
+                    sharedPrefEditor.putString("tab_num",user.getString("tab_num"));
+                    sharedPrefEditor.putString("company_post",user.getString("company_post"));
+                    sharedPrefEditor.putString("region",user.getString("region"));
+                    sharedPrefEditor.putString("date_password",user.getString("date_password"));
                     sharedPrefEditor.apply();
                     sharedPrefEditor.commit();
 

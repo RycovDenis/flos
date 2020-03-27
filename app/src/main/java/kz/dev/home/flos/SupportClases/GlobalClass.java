@@ -3,8 +3,9 @@ package kz.dev.home.flos.SupportClases;
 import android.app.Application;
 
 public class GlobalClass extends Application {
-    public static final String BASE_HOST = "http://16srb5pk.ddns.net/";
+//    public static final String BASE_HOST = "http://16srb5pk.ddns.net/";
 //    public static final String BASE_HOST = "http://192.168.0.100/";
+    public static final String BASE_HOST = "http://pch38.tk/";
     public static final String API_ROOT = "restdroid/";
     public static final String API_SIGNUP = "signup";
     public static final String API_SIGNIN = "signin";

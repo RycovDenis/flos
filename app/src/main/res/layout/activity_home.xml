@@ -1,0 +1,31 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ContentActivitys.HomeActivity">
+
+    <Button
+        android:id="@+id/logoutBtn"
+        android:text="Logout"
+        android:textAllCaps="false"
+        android:background="#fa0e3d"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/profileBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logoutBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:background="#fa0e3d"
+        android:text="Profile"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF" />
+
+</RelativeLayout>

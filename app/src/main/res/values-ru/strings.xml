@@ -12,8 +12,7 @@
     <string name="password_input_error">Минимальная длина пароля должна быть 5 символов.</string>
     <string name="settings">Настройки</string>
     <string name="action_favorite">Tikets</string>
-
-
+    <string name="already_have_an_acccount_login">Уже есть аккаунт? Авторизоваться ?</string>
 
 
 </resources>
