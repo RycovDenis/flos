@@ -5,7 +5,8 @@ package kz.dev.home.flos.services;
 
 public class URLs {
 
-    private static final String ROOT_URL = "http://pch38.tk/restodroid/api?apicall=";
-    public static final String URL_LOGIN= ROOT_URL + "login";
+    private static final String ROOT_URL = "http://pch38.tk/restdroid/signin?";
+//    public static final String URL_LOGIN= ROOT_URL + "login";
+    public static final String URL_LOGIN= ROOT_URL;
 
 }

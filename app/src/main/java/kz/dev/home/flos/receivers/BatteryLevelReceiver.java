@@ -38,7 +38,7 @@ public class BatteryLevelReceiver extends BroadcastReceiver {
             temp = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, -1);
             voltage = intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, -1);
             String message = "level="+level+" scale="+scale+" temp="+temp+" voltage="+voltage;
-            Toasty.info(context, message,Toast.LENGTH_LONG, true).show();
+//            Toasty.info(context, message,Toast.LENGTH_LONG, true).show();
             Log.d(TAG,intentAction+"   batteryChange="+batteryChange+"   flagLo="+batteryLow+"  batteryOK="+batteryOK+"  batteryPowerOn="+batteryPowerOn+"  batteryPowerOff="+batteryPowerOff+"\n  level="+level+"  temp="+temp+"  scale="+scale+"  voltage="+voltage);
 
         } catch (Exception e){
