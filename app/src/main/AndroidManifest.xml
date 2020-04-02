@@ -3,7 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="kz.dev.home.flos">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.BATTERY_STATS"
+        tools:ignore="ProtectedPermissions" />
 
     <application
         android:allowBackup="true"
@@ -15,31 +18,46 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="UnusedAttribute">
-        <activity android:name=".ContentActivitys.ProfileActivity"></activity>
+        <activity android:name=".activitys.ProfileActivity" />
         <activity android:name=".MainActivity" />
-        <activity
-            android:name=".ContentActivitys.SplashActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/SplashTheme"
-            tools:ignore="InnerclassSeparator,LockedOrientationActivity">
+        <activity android:name=".activitys.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".AuthActivitys.LoginActivity"
-            android:screenOrientation="portrait"
-            tools:ignore="InnerclassSeparator,LockedOrientationActivity" />
-        <activity
-            android:name=".ContentActivitys.HomeActivity"
-            android:screenOrientation="portrait"
-            tools:ignore="InnerclassSeparator,LockedOrientationActivity" />
-        <activity
-            android:name=".AuthActivitys.SignupActivity"
-            android:screenOrientation="portrait"
-            tools:ignore="InnerclassSeparator,LockedOrientationActivity" />
+        <receiver
+            android:name=".receivers.MessageReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="TODO"
+            tools:ignore="ExportedReceiver">
+            <intent-filter>
+                <action android:name="kz.dev.home.flos" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.BATTERY_LOW" />
+            </intent-filter>
+
+        </receiver>
+        <receiver android:name=".receivers.NetworkChangeReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".receivers.BatteryLevelReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_BATTERY_LOW"/>
+                <action android:name="android.intent.action.ACTION_BATTERY_OKAY"/>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+                <action android:name="android.intent.action.ACTION_BATTERY_CHANGED"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

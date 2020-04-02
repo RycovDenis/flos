@@ -13,6 +13,13 @@
     <string name="settings">Настройки</string>
     <string name="action_favorite">Tikets</string>
     <string name="already_have_an_acccount_login">Уже есть аккаунт? Авторизоваться ?</string>
+    <string name="connection_status_error">WiFi или GSM не активны!</string>
 
+    <string name="battery_low">Низкий заряд батареи</string>
+    <string name="power_conn">Кабель питания подключен</string>
+    <string name="empty_username_error">Пожалуйста, введите Ваш логин</string>
+    <string name="empty_password_error">Пожалуйста введите ваш пароль</string>
+    <string name="power_dsc">Кабель питания отключен</string>
+    <string name="connection_status_ok">WiFi или GSM активны!</string>
 
 </resources>

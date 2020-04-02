@@ -7,9 +7,17 @@
     <string name="Usernamelabel">E-Mail login</string>
     <string name="Passwordlabel">Password</string>
     <string name="content_description_end_icon">Show password symbols</string>
-    <string name="email_input_error">Invalid Email Address</string>
+    <string name="email_input_error">Invalid Email Address or Username</string>
+    <string name="empty_username_error">Please enter your username</string>
+    <string name="empty_password_error">Please enter your password</string>
     <string name="password_input_error">Minimum password length should be 5 characters.</string>
     <string name="settings">Settings</string>
     <string name="action_favorite">Tikets</string>
     <string name="already_have_an_acccount_login">Already have an acccount ? Login ?</string>
+    <string name="connection_status_error">WiFi or GSM are not active!</string>
+    <string name="battery_low">Battery low</string>
+    <string name="power_conn">Power cable is connected</string>
+    <string name="power_dsc">Power cable is disconnected</string>
+    <string name="connection_status_ok">WiFi or GSM are is active!</string>
+
 </resources>

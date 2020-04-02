@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AuthActivitys.LoginActivity">
+    tools:context=".MainActivity">
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
@@ -43,6 +43,7 @@
         android:layout_width="395dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:hint="@string/Usernamelabel"
@@ -85,42 +86,31 @@
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/loginBtn"
-        style="@style/Widget.MaterialComponents.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/signupNowTv"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="60dp"
-        android:fontFamily="sans-serif"
-        android:gravity="center"
-        android:text="@string/login_button"
-        android:textAppearance="?attr/textAppearanceButton"
-        android:textColor="@android:color/white"
-        android:textSize="11pt"
-        app:backgroundTint="@color/colorAccent"
-        app:icon="@drawable/ic_perm_identity_black_24dp"
-        app:rippleColor="?attr/colorOnPrimary"
-        app:shapeAppearance="?attr/shapeAppearanceSmallComponent" />
-
-    <TextView
-        android:id="@+id/signupNowTv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/passwordLayout"
-        android:layout_marginTop="0dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:gravity="right"
-        android:padding="5dp"
-        android:text="@string/don_t_have_an_acccount_signup_now"
-        android:textColor="@color/colorPrimary" />
+        <Button
+            android:id="@+id/loginBtn"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/EmailLayout"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="49dp"
+            android:layout_marginLeft="49dp"
+            android:layout_marginTop="98dp"
+            android:layout_marginEnd="71dp"
+            android:layout_marginRight="71dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="@string/login_button"
+            android:textAppearance="?attr/textAppearanceButton"
+            android:textColor="@android:color/white"
+            android:textSize="11pt"
+            app:backgroundTint="@color/colorAccent"
+            app:icon="@drawable/ic_perm_identity_black_24dp"
+            app:rippleColor="?attr/colorOnPrimary"
+            app:shapeAppearance="?attr/shapeAppearanceSmallComponent" />
 
     </RelativeLayout>
 </RelativeLayout>
