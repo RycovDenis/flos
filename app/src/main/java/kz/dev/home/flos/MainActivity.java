@@ -1,20 +1,21 @@
 package kz.dev.home.flos;
 
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.RadioGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import kz.dev.home.flos.activitys.LoginActivity;
-import kz.dev.home.flos.activitys.ProfileActivity;
-import kz.dev.home.flos.services.SharedPrefManager;
-
+import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
+    private static RecyclerView.Adapter adapter;
+    private static RecyclerView recyclerView;
+    private static ArrayList<DataModel> data;
+    private RecyclerView.LayoutManager layoutManager;
     private static final String TAG = "Main:";
+
 
 
 
@@ -22,12 +23,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-                if (SharedPrefManager.getInstance(this).isLoggedIn()) {
-                    finish();
-                    startActivity(new Intent(this, ProfileActivity.class));
-                    return;
-                }
+//                if (SharedPrefManager.getInstance(this).isLoggedIn()) {
+//                    finish();
+//                    startActivity(new Intent(this, ProfileActivity.class));
+//                    return;
+//                }
+        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        data = new ArrayList<DataModel>();
+        for (int i = 0; i < DataSet.title_Array.length; i++) {
+            data.add(new DataModel(
+                    DataSet.title_Array[i],
+                    DataSet.desc_Array[i]
+            ));
+        }
+        adapter = new CustomAdapter(data);
+        recyclerView.setAdapter(adapter);
     }
-
 }
 
