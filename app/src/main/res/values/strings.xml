@@ -19,5 +19,19 @@
     <string name="power_conn">Power cable is connected</string>
     <string name="power_dsc">Power cable is disconnected</string>
     <string name="connection_status_ok">WiFi or GSM are is active!</string>
+    <string name="drawer_open">Drawer Opened</string>
+    <string name="drawer_close">Drawer Closed</string>
+    <string name="loading">\tLoading…</string>
+    <string name="nav_menu_tools">Tools</string>
+    <string name="nav_menu_tasks">Tsks</string>
+    <string name="nav_menu_message">Messages</string>
+    <string name="nav_menu_tickets">Tickets</string>
+    <string name="navigation_drawer_close">CLOSE</string>
+    <string name="navigation_drawer_open">CLOSE</string>
+    <string-array name="navigation_drawer_items_array">
+        <item>Tickets</item>
+        <item>Tasks</item>
+        <item>Messages</item>
+    </string-array>
 
 </resources>

@@ -7,7 +7,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import kz.dev.home.flos.R;
-import kz.dev.home.flos.attribClasses.User;
+import kz.dev.home.flos.datamodels.User;
 import kz.dev.home.flos.services.SharedPrefManager;
 
 public class ProfileActivity extends AppCompatActivity {

@@ -21,5 +21,15 @@
     <string name="empty_password_error">Пожалуйста введите ваш пароль</string>
     <string name="power_dsc">Кабель питания отключен</string>
     <string name="connection_status_ok">WiFi или GSM активны!</string>
-
+    <string name="drawer_open">Drawer Opened</string>
+    <string name="drawer_close">Drawer Closed</string>
+    <string-array name="navigation_drawer_items_array">
+        <item>Тикеты</item>
+        <item>Задачи</item>
+        <item>Сообщения</item>
+    </string-array>
+    <string name="loading">\tЗагрузка…</string>
+    <string name="nav_menu_tools">Tools</string>
+    <string name="navigation_drawer_close">CLOSE</string>
+    <string name="navigation_drawer_open">CLOSE</string>
 </resources>

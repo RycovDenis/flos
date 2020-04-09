@@ -5,11 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.BatteryManager;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.Objects;
-
-import es.dmoral.toasty.Toasty;
 
 public class BatteryLevelReceiver extends BroadcastReceiver {
     private static final String TAG = "TGbattery";
@@ -37,8 +34,6 @@ public class BatteryLevelReceiver extends BroadcastReceiver {
             scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
             temp = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, -1);
             voltage = intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, -1);
-            String message = "level="+level+" scale="+scale+" temp="+temp+" voltage="+voltage;
-//            Toasty.info(context, message,Toast.LENGTH_LONG, true).show();
             Log.d(TAG,intentAction+"   batteryChange="+batteryChange+"   flagLo="+batteryLow+"  batteryOK="+batteryOK+"  batteryPowerOn="+batteryPowerOn+"  batteryPowerOff="+batteryPowerOff+"\n  level="+level+"  temp="+temp+"  scale="+scale+"  voltage="+voltage);
 
         } catch (Exception e){

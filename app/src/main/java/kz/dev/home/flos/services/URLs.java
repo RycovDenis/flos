@@ -5,8 +5,9 @@ package kz.dev.home.flos.services;
 
 public class URLs {
 
-    private static final String ROOT_URL = "http://pch38.tk/restdroid/signin?";
+    private static final String ROOT_URL = "http://pch38.tk/restdroid/";
 //    public static final String URL_LOGIN= ROOT_URL + "login";
-    public static final String URL_LOGIN= ROOT_URL;
+    public static final String URL_LOGIN = ROOT_URL+"signin?";
+    public static final String URL_TICKETS = ROOT_URL+"tickets?";
 
 }

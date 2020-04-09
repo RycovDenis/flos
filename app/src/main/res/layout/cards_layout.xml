@@ -1,41 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:tag="cards main container">
+
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_view"
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view_ticket"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
         card_view:cardCornerRadius="5dp"
-        card_view:cardElevation="10dp"
-        card_view:cardUseCompatPadding="true">
-        <LinearLayout
+        card_view:cardElevation="5dp"
+        card_view:cardUseCompatPadding="true"
+        card_view:contentPaddingTop="1dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="12dp"
-            android:layout_weight="2"
-            android:orientation="vertical"
-            >
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="12dp"
+            android:layout_weight="2">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_ti_status_priority"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="4dp"
+                android:scaleType="centerCrop"
+                android:src="@android:drawable/ic_menu_compass"
+                card_view:civ_border_color="#FFFFFFFF"
+                card_view:civ_border_width="3dp"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/text_title"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="@string/app_name"
-                android:layout_marginLeft="15dp"
+                android:textColor="@color/colorPrimaryText"
                 android:textStyle="bold"
-                android:layout_marginStart="15dp" />
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintHorizontal_bias="0.042"
+                card_view:layout_constraintStart_toEndOf="@+id/text_id"
+                card_view:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/text_desc"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
                 android:text="@string/don_t_have_an_acccount_signup_now"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginStart="15dp" />
-        </LinearLayout>
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintHorizontal_bias="0.028"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toBottomOf="@+id/text_title"
+                card_view:layout_constraintVertical_bias="0.015" />
+
+            <TextView
+                android:id="@+id/text_date"
+                android:layout_width="77dp"
+                android:layout_height="22dp"
+                android:layout_marginTop="12dp"
+                android:gravity="end"
+                android:text="2020-02-03"
+                android:textStyle="italic"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintHorizontal_bias="0.981"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toBottomOf="@+id/text_desc"
+                tools:ignore="RtlCompat" />
+
+            <TextView
+                android:id="@+id/text_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="16dp"
+                android:text="#1234567890"
+                card_view:layout_constraintStart_toEndOf="@+id/iv_ti_status_priority"
+                card_view:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/text_user_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="184dp"
+                android:layout_marginRight="184dp"
+                android:text="+77710515252"
+                card_view:layout_constraintEnd_toStartOf="@+id/text_date"
+                card_view:layout_constraintHorizontal_bias="0.312"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toBottomOf="@+id/text_desc" />
+
+            <TextView
+                android:id="@+id/text_user_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Rykov_D@zashita.railways.kz"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintHorizontal_bias="0.025"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toBottomOf="@+id/text_user_phone"
+                card_view:layout_constraintVertical_bias="0.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>

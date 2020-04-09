@@ -40,15 +40,10 @@ public class LoginActivity extends AppCompatActivity {
         editTextUsername = findViewById(R.id.nameEt);
         editTextPassword = findViewById(R.id.passwordEt);
         try {
-        if(status != NetworkUtil.TYPE_NOT_CONNECTED){
+        if(status != NetworkUtil.getTypeNotConnected()){
             //if user presses on login
             //calling the method login
-            findViewById(R.id.loginBtn).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    userLogin();
-                }
-            });
+            findViewById(R.id.loginBtn).setOnClickListener(view -> userLogin());
         }else{
             Toasty.error(this, getString(R.string.connection_status_error),Toast.LENGTH_LONG, true).show();
             Log.d(TAG,getString(R.string.connection_status_error));
@@ -87,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                progressBar = (ProgressBar) findViewById(R.id.progressBar);
+                progressBar = findViewById(R.id.progressBar);
                 progressBar.setVisibility(View.VISIBLE);
             }
 
@@ -95,15 +90,13 @@ public class LoginActivity extends AppCompatActivity {
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 progressBar.setVisibility(View.GONE);
-
-
                 try {
                     //converting response to json object
                     JSONObject obj = new JSONObject(s);
 
                     //if no error in response
                     if (!obj.getBoolean("error")) {
-                        Toasty.success(getApplicationContext(), obj.getString("message"),Toast.LENGTH_LONG, true).show();
+                        Toasty.info(getApplicationContext(), obj.getString("message"),Toast.LENGTH_LONG, true).show();
                         String token =  obj.getString("jwt");
                         JWT jwt = new JWT(token);
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);

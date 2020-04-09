@@ -1,5 +1,8 @@
-package kz.dev.home.flos.attribClasses;
+package kz.dev.home.flos.datamodels;
 
+/**
+ * Created by Belal on 9/5/2017.
+ */
 
 
 //this is very simple class and it only contains the user attributes, a constructor and the getters

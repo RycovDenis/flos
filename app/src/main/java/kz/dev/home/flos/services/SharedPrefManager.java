@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import kz.dev.home.flos.activitys.LoginActivity;
-import kz.dev.home.flos.attribClasses.User;
+import kz.dev.home.flos.datamodels.User;
 
 /**
  * Created by Belal on 9/5/2017.
