@@ -12,26 +12,49 @@
     <string name="empty_password_error">Please enter your password</string>
     <string name="password_input_error">Minimum password length should be 5 characters.</string>
     <string name="settings">Settings</string>
-    <string name="action_favorite">Tikets</string>
     <string name="already_have_an_acccount_login">Already have an acccount ? Login ?</string>
     <string name="connection_status_error">WiFi or GSM are not active!</string>
     <string name="battery_low">Battery low</string>
     <string name="power_conn">Power cable is connected</string>
     <string name="power_dsc">Power cable is disconnected</string>
     <string name="connection_status_ok">WiFi or GSM are is active!</string>
-    <string name="drawer_open">Drawer Opened</string>
-    <string name="drawer_close">Drawer Closed</string>
+    <string name="navigation_drawer_open">Drawer Opened</string>
+    <string name="navigation_drawer_close">Drawer Closed</string>
     <string name="loading">\tLoading…</string>
     <string name="nav_menu_tools">Tools</string>
-    <string name="nav_menu_tasks">Tsks</string>
+    <string name="nav_menu_tasks">Tasks</string>
     <string name="nav_menu_message">Messages</string>
     <string name="nav_menu_tickets">Tickets</string>
-    <string name="navigation_drawer_close">CLOSE</string>
-    <string name="navigation_drawer_open">CLOSE</string>
-    <string-array name="navigation_drawer_items_array">
-        <item>Tickets</item>
-        <item>Tasks</item>
-        <item>Messages</item>
-    </string-array>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="rbg_name">Priority Ticket</string>
+    <string name="prior_1">Blocked</string>
+    <string name="prior_2">Critical</string>
+    <string name="prior_3">Hight</string>
+    <string name="prior_4">Middle</string>
+    <string name="prior_5">Low</string>
+    <string name="string_new_ti">Create Ticket</string>
+    <string name="UserPhone">Phone Number</string>
+    <string name="TiTitle">Title</string>
+    <string name="btn_save">Save</string>
+    <string name="Label_email">User Email</string>
+    <string name="Label_phone">User Phone</string>
+    <string name="Label_ticket">Ticket Title</string>
+    <string name="Label_ti_text">Ticket Description</string>
+
 
 </resources>

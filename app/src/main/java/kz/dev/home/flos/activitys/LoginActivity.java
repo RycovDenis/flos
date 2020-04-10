@@ -76,9 +76,7 @@ public class LoginActivity extends AppCompatActivity {
 
         @SuppressLint("StaticFieldLeak")
         class UserLogin extends AsyncTask<Void, Void, String> {
-
             private ProgressBar progressBar;
-
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();

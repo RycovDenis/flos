@@ -11,7 +11,6 @@
     <string name="email_input_error">Неверный адрес электронной почты</string>
     <string name="password_input_error">Минимальная длина пароля должна быть 5 символов.</string>
     <string name="settings">Настройки</string>
-    <string name="action_favorite">Tikets</string>
     <string name="already_have_an_acccount_login">Уже есть аккаунт? Авторизоваться ?</string>
     <string name="connection_status_error">WiFi или GSM не активны!</string>
 
@@ -21,15 +20,28 @@
     <string name="empty_password_error">Пожалуйста введите ваш пароль</string>
     <string name="power_dsc">Кабель питания отключен</string>
     <string name="connection_status_ok">WiFi или GSM активны!</string>
-    <string name="drawer_open">Drawer Opened</string>
-    <string name="drawer_close">Drawer Closed</string>
-    <string-array name="navigation_drawer_items_array">
-        <item>Тикеты</item>
-        <item>Задачи</item>
-        <item>Сообщения</item>
-    </string-array>
+    <string name="navigation_drawer_open">Ящик открыт</string>
+    <string name="navigation_drawer_close">Ящик закрыт</string>
     <string name="loading">\tЗагрузка…</string>
-    <string name="nav_menu_tools">Tools</string>
-    <string name="navigation_drawer_close">CLOSE</string>
-    <string name="navigation_drawer_open">CLOSE</string>
+    <string name="nav_menu_tools">Инструменты</string>
+    <string name="nav_menu_tickets">Тикеты</string>
+    <string name="nav_menu_message">Сообщения</string>
+    <string name="nav_menu_tasks">Задачи</string>
+    <string name="rbg_name">Приоритет заявки</string>
+    <string name="prior_1">Блокирующий</string>
+    <string name="prior_2">Критический</string>
+    <string name="prior_3">Высокий</string>
+    <string name="prior_4">Средний</string>
+    <string name="prior_5">Низкий</string>
+    <string name="string_new_ti">Создание заявки</string>
+    <string name="UserPhone">Номер Телефона</string>
+    <string name="TiTitle">Тема</string>
+    <string name="btn_save">Сохранить</string>
+    <string name="Label_email">Email</string>
+    <string name="title_activity_settings">Настройки</string>
+    <string name="messages_header">Сообщения</string>
+    <string name="sync_header">Синхронизация</string>
+    <string name="Label_phone">Телефон</string>
+    <string name="Label_ticket">Тема заявки</string>
+    <string name="Label_ti_text">Описание заявки</string>
 </resources>
