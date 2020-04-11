@@ -14,8 +14,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.auth0.android.jwt.JWT;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -96,9 +94,8 @@ public class LoginActivity extends AppCompatActivity {
                     if (!obj.getBoolean("error")) {
                         Toasty.info(getApplicationContext(), obj.getString("message"),Toast.LENGTH_LONG, true).show();
                         String token =  obj.getString("jwt");
-                        JWT jwt = new JWT(token);
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.putExtra("jwt", jwt);
+                        intent.putExtra("token", token);
                         //starting the profile activity
                         finish();
                         startActivity(intent);

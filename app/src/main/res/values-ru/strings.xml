@@ -44,4 +44,5 @@
     <string name="Label_phone">Телефон</string>
     <string name="Label_ticket">Тема заявки</string>
     <string name="Label_ti_text">Описание заявки</string>
+    <string name="profile">Профиль</string>
 </resources>

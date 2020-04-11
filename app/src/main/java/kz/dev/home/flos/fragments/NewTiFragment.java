@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -33,8 +34,8 @@ public class NewTiFragment extends Fragment implements View.OnClickListener {
 
     private View rootView;
     private EditText etTIEmail, etTIPhone,etTITitle,etTIDesc;
-    private RadioGroup etTIPriority;
-    private String priority;
+    private RadioGroup radioGroup;
+    private String priority,uid;
     private Button saveButton;
 
     public NewTiFragment(){
@@ -51,7 +52,54 @@ public class NewTiFragment extends Fragment implements View.OnClickListener {
                 saveButton.setOnClickListener(this);
         }catch (Exception e) {
             Log.d(TAG, String.valueOf(e));
-        }return rootView;
+        }
+
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            uid = bundle.getString("UID");
+        }
+        radioGroup = (RadioGroup) rootView.findViewById(R.id.radioGroup);
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // find which radio button is selected
+                if(checkedId == R.id.prior_1) {
+                    priority = "1";
+                } else if(checkedId == R.id.prior_2) {
+                    priority = "2";
+                } else if(checkedId == R.id.prior_3) {
+                    priority = "3";
+                }else if(checkedId == R.id.prior_4) {
+                    priority = "4";
+                }else if(checkedId == R.id.prior_5) {
+                    priority = "5";
+
+                }
+            }
+
+        });
+        int selectedId = radioGroup.getCheckedRadioButtonId();
+        RadioButton prior_1 = (RadioButton) rootView.findViewById(R.id.prior_1);
+        RadioButton prior_2 = (RadioButton) rootView.findViewById(R.id.prior_2);
+        RadioButton prior_3 = (RadioButton) rootView.findViewById(R.id.prior_3);
+        RadioButton prior_4 = (RadioButton) rootView.findViewById(R.id.prior_4);
+        RadioButton prior_5 = (RadioButton) rootView.findViewById(R.id.prior_5);
+        // find which radioButton is checked by id
+        if(selectedId == prior_1.getId()) {
+            priority = "1";
+        } else if(selectedId == prior_2.getId()) {
+            priority = "2";
+        } else if(selectedId == prior_3.getId()) {
+            priority = "3";
+        }else if(selectedId == prior_4.getId()) {
+            priority = "4";
+        }else if(selectedId == prior_5.getId()) {
+            priority = "5";
+        }
+        return rootView;
+
     }
 
 
@@ -61,30 +109,6 @@ public class NewTiFragment extends Fragment implements View.OnClickListener {
         etTIPhone = rootView.findViewById(R.id.nt_etPhone);
         etTITitle = rootView.findViewById(R.id.nt_etTitle);
         etTIDesc = rootView.findViewById(R.id.nt_etText);
-        etTIPriority = (RadioGroup) rootView.findViewById(R.id.radioGroup);
-        
-        etTIPriority.setOnCheckedChangeListener((group, checkedId) -> {
-            switch (checkedId) {
-                case R.id.prior_1:
-                    priority = "1";
-                    break;
-                case R.id.prior_2:
-                    priority = "2";
-                    break;
-                case R.id.prior_3:
-                    priority = "3";
-                    break;
-                case R.id.prior_4:
-                    priority = "4";
-                    break;
-                case R.id.prior_5:
-                    priority = "5";
-                    break;
-                default:
-                    break;
-            }
-        });
-        //first getting the values
         final String user_email = etTIEmail.getText().toString();
         final String user_phone = etTIPhone.getText().toString();
         final String ticket_title = etTITitle.getText().toString();
@@ -120,20 +144,17 @@ public class NewTiFragment extends Fragment implements View.OnClickListener {
 
             @Override
             protected String doInBackground(Void... voids) {
+
                 //creating request handler object
                 RequestHandler requestHandler = new RequestHandler();
-
                 //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
                 params.put("email", user_email);
                 params.put("UserPhone", user_phone);
                 params.put("ticketTitle", ticket_title);
-                params.put("ticketPriority", "1");
+                params.put("ticketPriority", priority_ti);
                 params.put("TicketDesc", ticket_description);
-                params.put("UserID", "1");
-                Log.d(TAG, "priority="+ priority_ti);
-
-
+                params.put("UserID", uid);
                 //returing the response
                 return requestHandler.sendPostRequest(URLs.URL_NEW_TICKET, params);
             }

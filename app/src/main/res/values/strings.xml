@@ -55,6 +55,7 @@
     <string name="Label_phone">User Phone</string>
     <string name="Label_ticket">Ticket Title</string>
     <string name="Label_ti_text">Ticket Description</string>
+    <string name="profile">Profile</string>
 
 
 </resources>

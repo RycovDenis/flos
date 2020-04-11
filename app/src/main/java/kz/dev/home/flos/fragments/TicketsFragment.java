@@ -46,6 +46,7 @@ public class TicketsFragment extends Fragment {
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private ProgressBar progressBar;
     private View rootView;
+    private String uid,role;
 
     public TicketsFragment() {
     }
@@ -63,6 +64,11 @@ public class TicketsFragment extends Fragment {
                 new AsyncFetch().execute();
             }
         });
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            uid = bundle.getString("UID");
+            role = bundle.getString("role_id");
+        }
 
 
         //Make call to AsyncTask
@@ -89,23 +95,17 @@ public class TicketsFragment extends Fragment {
         @Override
         protected String doInBackground(String... params) {
             try {
-
-                int u_id = 1;
-                url = new URL(URL_TICKETS+"id="+ u_id);
-
+                url = new URL(URL_TICKETS+"id="+ uid +"&role=" + role);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
                 return e.toString();
             }
             try {
-
-                // Setup HttpURLConnection class to send and receive data from php and mysql
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setReadTimeout(READ_TIMEOUT);
                 conn.setConnectTimeout(CONNECTION_TIMEOUT);
                 conn.setRequestMethod("GET");
                 conn.setDoOutput(true);
-
             } catch (IOException e1) {
                 e1.printStackTrace();
                 return e1.toString();
