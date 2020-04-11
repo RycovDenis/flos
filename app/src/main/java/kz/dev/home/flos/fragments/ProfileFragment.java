@@ -6,12 +6,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.amulyakhare.textdrawable.TextDrawable;
+import com.mklimek.circleinitialsview.CircleInitialsView;
+
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import kz.dev.home.flos.R;
@@ -47,9 +48,6 @@ public class ProfileFragment extends Fragment {
     private void setTextViews() {
         uName.setText(fname + " " + lname);
         uRole.setText(role);
-        TextDrawable drawable = TextDrawable.builder()
-                .buildRect("D", Color.RED);
-        imageAvatar.setImageDrawable(drawable);
     }
 
     private void getTextViews() {

@@ -3,12 +3,12 @@ package kz.dev.home.flos;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -238,7 +238,8 @@ public class MainActivity extends AppCompatActivity
     private void imgMeVoid(){
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
-        circleImageView = (CircleImageView) headerView.findViewById(R.id.action_profile);
+
+        circleImageView = (CircleImageView ) headerView.findViewById(R.id.action_profile);
         circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

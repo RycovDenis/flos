@@ -36,7 +36,7 @@ dependencies {
     implementation 'com.github.GrenderG:Toasty:1.4.2'
 
     implementation 'com.auth0.android:jwtdecode:2.0.0'
-    implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
+    implementation 'com.github.mklimek:circle-initials-view:1.0.9'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
