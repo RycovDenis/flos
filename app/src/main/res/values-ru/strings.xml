@@ -46,4 +46,21 @@
     <string name="Label_ti_text">Описание заявки</string>
     <string name="profile">Профиль</string>
     <string name="send">Отправить</string>
+    <string name="register_button">Регистрация</string>
+    <string name="signature_title">Ваша подпись</string>
+    <string name="reply_title">Пересылать по умолчанию</string>
+    <string name="sync_title">Периодически синхронизировать электронную почту</string>
+    <string name="attachment_title">Скачать входящие вложения</string>
+    <string name="attachment_summary_on">Автоматически загружать вложения для входящих писем</string>
+    <string name="attachment_summary_off">Загружать вложения можно только по запросу вручную</string>
+    <string name="empty_phone_error">Пожалуйста, введите номер вашего мобильного телефона</string>
+    <string name="lastName">Last Name</string>
+    <string name="firstName">First Name</string>
+    <string name="middleName">Middle Name</string>
+    <string name="INNlabel">INN</string>
+    <string name="TabNumLabel">Tabel Number</string>
+    <string name="CPLabel">Company post</string>
+    <string name="RegionLabel">Region Location</string>
+    <string name="saveUInfo_button">save user info</string>
+    <string name="recent_code">Recent verification code</string>
 </resources>

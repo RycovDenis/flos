@@ -24,6 +24,8 @@
         tools:ignore="UnusedAttribute">
         <activity android:name=".activitys.ProfileActivity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".activitys.RegisterActivity" />
+        <activity android:name=".activitys.UserInfoActivity" />
         <activity android:name=".activitys.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
