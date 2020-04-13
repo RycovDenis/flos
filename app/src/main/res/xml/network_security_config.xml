@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
     <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="true">api.androidhive.info</domain>
         <domain includeSubdomains="true">16srb5pk.ddns.net</domain>
         <domain includeSubdomains="true">pch38.tk</domain>
-        <domain includeSubdomains="true">10.10.10.200</domain>
-        <domain includeSubdomains="true">www.roundsapp.com</domain>
-        <domain includeSubdomains="true">roundsapp.com</domain>
+
     </domain-config>
 </network-security-config>

@@ -39,7 +39,7 @@ import kz.dev.home.flos.datamodels.Ticket;
 
 import static kz.dev.home.flos.services.URLs.URL_TICKETS;
 
-public class TicketsFragment extends Fragment {
+public class TicketsFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "TicketsFragment :";
     private static final int CONNECTION_TIMEOUT = 10000;
     private static final int READ_TIMEOUT = 15000;
@@ -70,11 +70,15 @@ public class TicketsFragment extends Fragment {
             role = bundle.getString("role_id");
         }
 
-
-        //Make call to AsyncTask
         new AsyncFetch().execute();
         return rootView;
     }
+
+    @Override
+    public void onClick(View v) {
+        rootView.findViewById(R.id.card_view_ticket);
+    }
+
     @SuppressLint("StaticFieldLeak")
     private class AsyncFetch extends AsyncTask<String, String, String> {
 //        ProgressDialog pdLoading = new ProgressDialog(TicketsFragment.this);
@@ -84,12 +88,8 @@ public class TicketsFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
-            //this method will be running on UI thread
             progressBar = (ProgressBar) rootView.findViewById(R.id.pgBar);
             progressBar.setVisibility(ProgressBar.VISIBLE);
-// запускаем длительную операцию
-
         }
 
         @Override
@@ -110,7 +110,6 @@ public class TicketsFragment extends Fragment {
                 e1.printStackTrace();
                 return e1.toString();
             }
-
             try {
 
                 int response_code = conn.getResponseCode();
@@ -140,8 +139,6 @@ public class TicketsFragment extends Fragment {
             } finally {
                 conn.disconnect();
             }
-
-
         }
 
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -150,12 +147,10 @@ public class TicketsFragment extends Fragment {
             super.onPostExecute(s);
             List<Ticket> data=new ArrayList<>();
             progressBar.setVisibility(ProgressBar.INVISIBLE);
-
             try {
                 JSONObject obj = new JSONObject(s);
                 if (!obj.getBoolean("error")) {
                     Toasty.success(Objects.requireNonNull(getActivity()).getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG, true).show();
-//                    JSONObject ticketsJson = obj.getJSONObject("tickets");
                     JSONArray jArray = new JSONArray(obj.getString("tickets"));
                     for(int i=0;i<jArray.length();i++){
                         JSONObject json_data = jArray.getJSONObject(i);
@@ -178,12 +173,12 @@ public class TicketsFragment extends Fragment {
                     AdapterTicket mAdapter = new AdapterTicket(Objects.requireNonNull(getActivity()).getApplicationContext(), data);
                     mRVFishPrice.setAdapter(mAdapter);
                     mRVFishPrice.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
-                } else {
-                    Toasty.error(Objects.requireNonNull(getActivity()).getApplicationContext(), R.string.email_input_error,Toast.LENGTH_LONG, true).show();
                 }
+                //                    Toasty.error(Objects.requireNonNull(getActivity()).getApplicationContext(), R.string.email_input_error,Toast.LENGTH_LONG, true).show();
+
             } catch (JSONException e) {
                 Log.d(TAG, String.valueOf(e));
-                Toasty.error(Objects.requireNonNull(getActivity()).getApplicationContext(), e.toString(), Toast.LENGTH_LONG,true).show();
+//                Toasty.error(Objects.requireNonNull(getActivity()).getApplicationContext(), e.toString(), Toast.LENGTH_LONG,true).show();
             }
             mSwipeRefreshLayout.setRefreshing(false);
 

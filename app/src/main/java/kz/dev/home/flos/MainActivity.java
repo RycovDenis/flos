@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity
     private static final String TAG = "Main:";
     private boolean viewIsAtHome;
     public String token;
-    public String parsedValueUid,parsedValueFname,parsedValueLname,parsedValueEmail,parsedValueRoleID,parsedValueRoleName;
+    public String parsedValueUid,parsedValueFname,parsedValueLname,parsedValueEmail,parsedValueRoleID,parsedValueRoleName,parsedValueUphone;
     public static final String Secret_KEY = "144541354333adswcxs2axas24xcas1x456as47d532c4w";
     private TextView nvName, nvRole;
     CircleImageView circleImageView;
@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity
         bundle.putString("fname", parsedValueFname);
         bundle.putString("lname", parsedValueLname);
         bundle.putString("email", parsedValueEmail);
+        bundle.putString("uphone", parsedValueUphone);
         bundle.putString("role_id", parsedValueRoleID);
         bundle.putString("role_name", parsedValueRoleName);
         Fragment fragment = null;
@@ -185,11 +186,13 @@ public class MainActivity extends AppCompatActivity
         Claim lastname = jwt.getClaim("lastname");
         Claim email = jwt.getClaim("email");
         Claim role_id = jwt.getClaim("role_id");
+        Claim u_phone = jwt.getClaim("mphone");
         Claim role_name = jwt.getClaim("role_name");
         parsedValueUid = uid.asString();
         parsedValueFname = firstname.asString();
         parsedValueLname = lastname.asString();
         parsedValueEmail = email.asString();
+        parsedValueUphone = u_phone.asString();
         parsedValueRoleID = role_id.asString();
         parsedValueRoleName = role_name.asString();
     }

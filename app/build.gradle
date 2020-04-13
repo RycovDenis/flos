@@ -34,6 +34,8 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.github.GrenderG:Toasty:1.4.2'
+    implementation 'com.github.stfalcon:smsverifycatcher:0.3.2'
+    implementation 'com.github.stfalcon:chatkit:0.3.3'
 
     implementation 'com.auth0.android:jwtdecode:2.0.0'
     implementation 'com.github.mklimek:circle-initials-view:1.0.9'
