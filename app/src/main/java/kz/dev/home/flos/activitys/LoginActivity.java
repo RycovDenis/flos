@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -28,7 +29,7 @@ import kz.dev.home.flos.services.URLs;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "Login:";
-
+    Button btnOk;
     EditText editTextUsername, editTextPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,14 @@ public class LoginActivity extends AppCompatActivity {
             //if user presses on login
             //calling the method login
             findViewById(R.id.loginBtn).setOnClickListener(view -> userLogin());
+            Intent i;
+            btnOk = (Button)  findViewById(R.id.newUserBtn);
+            View.OnClickListener oclBtnOk = v -> {
+                Intent i1 = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(i1);
+
+            };
+            btnOk.setOnClickListener(oclBtnOk);
         }else{
             Toasty.error(this, getString(R.string.connection_status_error),Toast.LENGTH_LONG, true).show();
             Log.d(TAG,getString(R.string.connection_status_error));

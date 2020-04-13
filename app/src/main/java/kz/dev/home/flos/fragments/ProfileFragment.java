@@ -1,7 +1,7 @@
 package kz.dev.home.flos.fragments;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,17 +10,14 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.mklimek.circleinitialsview.CircleInitialsView;
-
-import java.util.Objects;
+import com.auth0.android.jwt.Claim;
+import com.auth0.android.jwt.JWT;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import kz.dev.home.flos.R;
 
 public class ProfileFragment extends Fragment {
     private static final String TAG = "TicketsFragment :";
-    private static final int CONNECTION_TIMEOUT = 10000;
-    private static final int READ_TIMEOUT = 15000;
     private View rootView;
     private String uid,role,fname,lname;
     private TextView uName,uRole;
@@ -55,5 +52,27 @@ public class ProfileFragment extends Fragment {
         uRole = rootView.findViewById(R.id.user_role);
         imageAvatar =  rootView.findViewById(R.id.image_avatar);
     }
+
+    private void jwtUserParse(){
+//        Intent intent = getIntent();
+//        token = intent.getStringExtra("token");
+//        assert token != null;
+        JWT jwt = new JWT(uinfo);
+        Claim uid = jwt.getClaim("uid");
+        Claim firstname = jwt.getClaim("firstname");
+        Claim lastname = jwt.getClaim("lastname");
+        Claim email = jwt.getClaim("email");
+        Claim role_id = jwt.getClaim("role_id");
+        Claim u_phone = jwt.getClaim("mphone");
+        Claim role_name = jwt.getClaim("role_name");
+        parsedValueUid = uid.asString();
+        parsedValueFname = firstname.asString();
+        parsedValueLname = lastname.asString();
+        parsedValueEmail = email.asString();
+        parsedValueUphone = u_phone.asString();
+        parsedValueRoleID = role_id.asString();
+        parsedValueRoleName = role_name.asString();
+    }
+
 
 }

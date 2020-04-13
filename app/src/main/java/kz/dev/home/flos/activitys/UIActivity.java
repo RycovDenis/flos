@@ -23,7 +23,7 @@ import kz.dev.home.flos.services.RequestHandler;
 import kz.dev.home.flos.services.URLs;
 
 @SuppressLint("Registered")
-class UserInfoActivity extends AppCompatActivity {
+public class UIActivity extends AppCompatActivity {
     private static final String TAG = "Register:";
     EditText editTextFName, editTextMName,editTextLName,editTextINN,editTextTabNum,editTextCP,editTextRegion;
     @Override
@@ -57,6 +57,7 @@ class UserInfoActivity extends AppCompatActivity {
     @SuppressLint("ResourceType")
     private void setUserInfo() {
         //first getting the values
+        final String uid = getIntent().getStringExtra("uid");
         final String fname = editTextFName.getText().toString();
         final String mname = editTextMName.getText().toString();
         final String lname = editTextLName.getText().toString();
@@ -116,11 +117,10 @@ class UserInfoActivity extends AppCompatActivity {
                     JSONObject obj = new JSONObject(s);
                     if (!obj.getBoolean("error")) {
                         Toasty.info(getApplicationContext(), obj.getString("message"),Toast.LENGTH_LONG, true).show();
-                        String email =  obj.getString("email");
-                        Intent intent = new Intent(UserInfoActivity.this, LoginActivity.class);
-                        intent.putExtra("email", email);
-                        finish();
-                        startActivity(intent);
+                            Intent intent = new Intent(UIActivity.this, LoginActivity.class);
+                            finish();
+                            startActivity(intent);
+
                     } else {
                         Toasty.error(getApplicationContext(), R.string.email_input_error,Toast.LENGTH_LONG, true).show();
                     }
@@ -133,6 +133,7 @@ class UserInfoActivity extends AppCompatActivity {
             protected String doInBackground(Void... voids) {
                 RequestHandler requestHandler = new RequestHandler();
                 HashMap<String, String> params = new HashMap<>();
+                params.put("uid",uid);
                 params.put("fname", fname);
                 params.put("mname", mname);
                 params.put("lname", lname);
