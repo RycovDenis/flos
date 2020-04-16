@@ -96,7 +96,6 @@ public class AdapterTicket extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             PopupMenu popupMenu = new PopupMenu(AdapterTicket.this.context, v);
             popupMenu.getMenuInflater().inflate(R.menu.ticket_menu, popupMenu.getMenu());
             popupMenu.show();
-
             popupMenu.setOnMenuItemClickListener(item -> {
                 switch (item.getItemId()) {
                     case R.id.menu_vwt:

@@ -2,14 +2,11 @@ package kz.dev.home.flos;
 
 
 import android.annotation.SuppressLint;
-import android.app.FragmentManager;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,7 +24,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import kz.dev.home.flos.adapters.AdapterTicket;
 import kz.dev.home.flos.fragments.MessagesFragment;
 import kz.dev.home.flos.fragments.NewTiFragment;
 import kz.dev.home.flos.fragments.ProfileFragment;

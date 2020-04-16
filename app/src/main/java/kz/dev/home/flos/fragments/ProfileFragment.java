@@ -23,11 +23,12 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Objects;
 
-//import de.hdodenhof.circleimageview.CircleImageView;
 import es.dmoral.toasty.Toasty;
 import kz.dev.home.flos.R;
 import kz.dev.home.flos.services.RequestHandler;
 import kz.dev.home.flos.services.URLs;
+
+//import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment {
     private static final String TAG = "TicketsFragment :";
