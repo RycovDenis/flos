@@ -21,7 +21,6 @@ import kz.dev.home.flos.services.RequestHandler;
 import kz.dev.home.flos.services.URLs;
 
 public class SMSVerifyActivity extends AppCompatActivity {
-    private static final String TAG = "SMSVerify:";
     private Boolean status;
     private EditText etCode;
 
@@ -44,10 +43,6 @@ public class SMSVerifyActivity extends AppCompatActivity {
 
         @SuppressLint("StaticFieldLeak")
         class VerifySMS extends AsyncTask<Void, Void, String> {
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-            }
 
             @Override
             protected void onPostExecute(String s) {
@@ -93,10 +88,6 @@ public class SMSVerifyActivity extends AppCompatActivity {
         //validating inputs
         @SuppressLint("StaticFieldLeak")
         class CreateUser extends AsyncTask<Void, Void, String> {
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-            }
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);

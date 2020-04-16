@@ -19,7 +19,8 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_nav_menu_header_bg"
-            app:srcCompat="@drawable/ic_nav_menu_header_bg" />
+            app:srcCompat="@drawable/ic_nav_menu_header_bg"
+            android:contentDescription="Header PRofile" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             app:civ_border_width="3dp"
@@ -33,7 +34,9 @@
             android:elevation="5dp"
             android:padding="20dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/project_logo" />
+            android:src="@drawable/project_logo"
+            tools:ignore="VectorDrawableCompat"
+            tools:targetApi="lollipop" />
 
         <RelativeLayout
             android:id="@+id/profile_layout"
@@ -42,7 +45,8 @@
             android:layout_below="@+id/header_cover_image"
             android:background="@color/colorPrimaryDark"
             android:elevation="4dp"
-            android:paddingBottom="24dp">
+            android:paddingBottom="24dp"
+            tools:targetApi="lollipop">
 
 
             <TextView
@@ -78,7 +82,8 @@
                 android:paddingLeft="1dp"
                 android:paddingTop="1dp"
                 android:paddingRight="1dp"
-                android:paddingBottom="1dp">
+                android:paddingBottom="1dp"
+                tools:targetApi="lollipop">
 
                 <TableRow
                     android:layout_width="match_parent"
@@ -89,7 +94,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:text="User ID"
+                        android:text="@string/user_id"
                         android:textStyle="bold" />
 
                     <TableRow
@@ -114,7 +119,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:text="E-Mail"
+                        android:text="@string/e_mail"
                         android:textStyle="bold" />
 
                     <TableRow
@@ -139,7 +144,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:text="Work: "
+                        android:text="@string/work"
                         android:textStyle="bold" />
 
                     <TableRow
@@ -165,7 +170,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:text="INN:"
+                        android:text="@string/inn"
                         android:textStyle="bold" />
 
                     <TableRow
@@ -191,7 +196,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:text="Your IP:"
+                        android:text="@string/your_ip"
                         android:textStyle="bold" />
 
                     <TableRow
@@ -217,8 +222,9 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:layout_marginStart="8dp"
-                        android:text="Tabel NUM:"
-                        android:textStyle="bold" />
+                        android:text="@string/tabel_num"
+                        android:textStyle="bold"
+                        tools:ignore="RtlCompat" />
 
                     <TableRow
                         android:layout_width="match_parent"
@@ -242,7 +248,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:text="Company post:"
+                        android:text="@string/company_post"
                         android:textStyle="bold" />
 
                     <TableRow
@@ -267,7 +273,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:text="Permited:"
+                        android:text="@string/permited"
                         android:textStyle="bold" />
 
                     <TableRow
@@ -292,7 +298,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:text="Date last password:"
+                        android:text="@string/date_last_password"
                         android:textStyle="bold" />
 
                     <TableRow

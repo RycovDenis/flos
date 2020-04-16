@@ -1,8 +1,12 @@
 package kz.dev.home.flos.activitys;
 
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -29,43 +33,49 @@ import kz.dev.home.flos.services.URLs;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "Login:";
-    Button btnOk;
-    EditText editTextUsername, editTextPassword;
+    private EditText editTextUsername;
+    private EditText editTextPassword;
+    private String username;
+    private String password;
+
+
+    //account name identifier.
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         int status = NetworkUtil.getConnectivityStatus(this);
-        editTextUsername = findViewById(R.id.nameEt);
-        editTextPassword = findViewById(R.id.passwordEt);
-        try {
-        if(status != NetworkUtil.getTypeNotConnected()){
-            //if user presses on login
-            //calling the method login
-            findViewById(R.id.loginBtn).setOnClickListener(view -> userLogin());
-            Intent i;
-            btnOk = (Button)  findViewById(R.id.newUserBtn);
-            View.OnClickListener oclBtnOk = v -> {
-                Intent i1 = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(i1);
 
-            };
-            btnOk.setOnClickListener(oclBtnOk);
-        }else{
-            Toasty.error(this, getString(R.string.connection_status_error),Toast.LENGTH_LONG, true).show();
-            Log.d(TAG,getString(R.string.connection_status_error));
-        }
-    }catch (Exception e) {
-        Log.d(TAG, String.valueOf(e));
-    }
+                editTextUsername = findViewById(R.id.nameEt);
+                editTextPassword = findViewById(R.id.passwordEt);
+                try {
+                    if(status != NetworkUtil.getTypeNotConnected()){
+                        findViewById(R.id.loginBtn).setOnClickListener(view -> userLogin());
+                        Button btnOk = findViewById(R.id.newUserBtn);
+                        View.OnClickListener oclBtnOk = v -> {
+                            Intent i1 = new Intent(LoginActivity.this, RegisterActivity.class);
+                            startActivity(i1);
+
+                        };
+                        btnOk.setOnClickListener(oclBtnOk);
+                    }else{
+                        Toasty.error(this, getString(R.string.connection_status_error),Toast.LENGTH_LONG, true).show();
+                        Log.d(TAG,getString(R.string.connection_status_error));
+                    }
+                }catch (Exception e) {
+                    Log.d(TAG, String.valueOf(e));
+                }
+
 
     }
 
     @SuppressLint("ResourceType")
     private void userLogin() {
-        //first getting the values
-        final String username = editTextUsername.getText().toString();
-        final String password = editTextPassword.getText().toString();
+
+            username = editTextUsername.getText().toString();
+            password = editTextPassword.getText().toString();
 
         //validating inputs
         if (TextUtils.isEmpty(username)) {
@@ -78,6 +88,7 @@ public class LoginActivity extends AppCompatActivity {
             editTextPassword.requestFocus();
             return;
         }
+
 
         //if everything is fine
 
@@ -103,9 +114,9 @@ public class LoginActivity extends AppCompatActivity {
                     if (!obj.getBoolean("error")) {
                         Toasty.info(getApplicationContext(), obj.getString("message"),Toast.LENGTH_LONG, true).show();
                         String token =  obj.getString("jwt");
+//                        String access =  obj.getString("ajwt");
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.putExtra("token", token);
-                        //starting the profile activity
                         finish();
                         startActivity(intent);
                     } else {
@@ -120,7 +131,6 @@ public class LoginActivity extends AppCompatActivity {
             protected String doInBackground(Void... voids) {
                 //creating request handler object
                 RequestHandler requestHandler = new RequestHandler();
-
                 //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
                 params.put("username", username);
@@ -134,4 +144,6 @@ public class LoginActivity extends AppCompatActivity {
         UserLogin ul = new UserLogin();
         ul.execute();
     }
+
+
 }

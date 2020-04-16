@@ -66,11 +66,6 @@ public class RegisterActivity extends AppCompatActivity {
             private ProgressBar progressBar;
 
             @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-            }
-
-            @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 finish();

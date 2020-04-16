@@ -1,5 +1,5 @@
 <resources>
-
+<!--    ThemeOverlay.AppCompat.ActionBar-->
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->

@@ -2,6 +2,7 @@ package kz.dev.home.flos;
 
 
 import android.annotation.SuppressLint;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import kz.dev.home.flos.adapters.AdapterTicket;
 import kz.dev.home.flos.fragments.MessagesFragment;
 import kz.dev.home.flos.fragments.NewTiFragment;
 import kz.dev.home.flos.fragments.ProfileFragment;
@@ -38,17 +40,23 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
     private static final String TAG = "Main:";
     private boolean viewIsAtHome;
-    public String token;
-    public String parsedValueUid,parsedValueFname,parsedValueLname,parsedValueEmail,parsedValueRoleID,parsedValueRoleName,parsedValueUphone;
+    private String token;
+    private String parsedValueUid;
+    private String parsedValueFname;
+    private String parsedValueLname;
+    private String parsedValueEmail;
+    private String parsedValueRoleID;
+    private String parsedValueRoleName;
+    private String parsedValueUphone;
     public static final String Secret_KEY = "144541354333adswcxs2axas24xcas1x456as47d532c4w";
-    private TextView nvName, nvRole;
-    CircleImageView circleImageView;
+    private CircleImageView circleImageView;
 
 
 
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -57,6 +65,7 @@ public class MainActivity extends AppCompatActivity
         drawerMeVoid();
         imgMeVoid();
         fabMeVoid();
+
 
     }
 
@@ -82,7 +91,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
@@ -92,7 +101,7 @@ public class MainActivity extends AppCompatActivity
             moveTaskToBack(true);  //If view is in News fragment, exit application
         }
     }
-    public void displayView(int viewId) {
+    private void displayView(int viewId) {
         Bundle bundle = new Bundle();
         bundle.putString("UID", parsedValueUid);
         bundle.putString("fname", parsedValueFname);
@@ -161,17 +170,17 @@ public class MainActivity extends AppCompatActivity
             getSupportActionBar().setTitle(title);
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
     }
     @SuppressLint("SetTextI18n")
     private void changeTextNH(){
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
 //        TextView navUsername = (TextView) headerView.findViewById(R.id.navUsername);
-        nvName = (TextView) headerView.findViewById(R.id.nh_name);
-        nvRole = (TextView) headerView.findViewById(R.id.nh_role);
+        TextView nvName = headerView.findViewById(R.id.nh_name);
+        TextView nvRole = headerView.findViewById(R.id.nh_role);
         nvName.setText(parsedValueFname + " "+parsedValueLname);
         nvRole.setText(parsedValueRoleName);
 //        navUsername.setText("Your Text Here");
@@ -239,10 +248,10 @@ public class MainActivity extends AppCompatActivity
         });
     }
     private void imgMeVoid(){
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
 
-        circleImageView = (CircleImageView ) headerView.findViewById(R.id.action_profile);
+        circleImageView = headerView.findViewById(R.id.action_profile);
         circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

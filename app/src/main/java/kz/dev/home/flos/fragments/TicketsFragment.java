@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -39,14 +38,17 @@ import kz.dev.home.flos.datamodels.Ticket;
 
 import static kz.dev.home.flos.services.URLs.URL_TICKETS;
 
-public class TicketsFragment extends Fragment implements View.OnClickListener {
+public class TicketsFragment extends Fragment{
+
     private static final String TAG = "TicketsFragment :";
     private static final int CONNECTION_TIMEOUT = 10000;
     private static final int READ_TIMEOUT = 15000;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    private ProgressBar progressBar;
+//    private AdapterTicket.OnItemClickListener listener;
     private View rootView;
     private String uid,role;
+
+
 
     public TicketsFragment() {
     }
@@ -57,13 +59,8 @@ public class TicketsFragment extends Fragment implements View.OnClickListener {
 
         rootView = inflater.inflate(R.layout.fragment_tickets, container,
                 false);
-        mSwipeRefreshLayout = (SwipeRefreshLayout)rootView.findViewById(R.id.swifeRefresh);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                new AsyncFetch().execute();
-            }
-        });
+        mSwipeRefreshLayout = rootView.findViewById(R.id.swifeRefresh);
+        mSwipeRefreshLayout.setOnRefreshListener(() -> new AsyncFetch().execute());
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             uid = bundle.getString("UID");
@@ -74,23 +71,12 @@ public class TicketsFragment extends Fragment implements View.OnClickListener {
         return rootView;
     }
 
-    @Override
-    public void onClick(View v) {
-        rootView.findViewById(R.id.card_view_ticket);
-    }
 
     @SuppressLint("StaticFieldLeak")
     private class AsyncFetch extends AsyncTask<String, String, String> {
 //        ProgressDialog pdLoading = new ProgressDialog(TicketsFragment.this);
         HttpURLConnection conn;
         URL url = null;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            progressBar = (ProgressBar) rootView.findViewById(R.id.pgBar);
-            progressBar.setVisibility(ProgressBar.VISIBLE);
-        }
 
         @Override
         protected String doInBackground(String... params) {
@@ -146,7 +132,6 @@ public class TicketsFragment extends Fragment implements View.OnClickListener {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             List<Ticket> data=new ArrayList<>();
-            progressBar.setVisibility(ProgressBar.INVISIBLE);
             try {
                 JSONObject obj = new JSONObject(s);
                 if (!obj.getBoolean("error")) {
@@ -155,34 +140,33 @@ public class TicketsFragment extends Fragment implements View.OnClickListener {
                     for(int i=0;i<jArray.length();i++){
                         JSONObject json_data = jArray.getJSONObject(i);
                         Ticket ticketData = new Ticket();
-                        ticketData.tiId= json_data.getInt("ti_id");
-                        ticketData.title= json_data.getString("title");
-                        ticketData.text= json_data.getString("text");
-                        ticketData.userId= json_data.getInt("user_id");
-                        ticketData.ownerId= json_data.getInt("owner_id");
-                        ticketData.priority= json_data.getInt("priority");
-                        ticketData.status= json_data.getInt("status");
-                        ticketData.tiDate= json_data.getString("ti_date");
-                        ticketData.tiEmail= json_data.getString("ti_email");
-                        ticketData.tiPhone= json_data.getString("ti_phone");
+                        ticketData.setTiId(json_data.getInt("ti_id"));
+                        ticketData.setTitle(json_data.getString("title"));
+                        ticketData.setText(json_data.getString("text"));
+                        ticketData.setUserId(json_data.getInt("user_id"));
+                        ticketData.setOwnerId(json_data.getInt("owner_id"));
+                        ticketData.setPriority (json_data.getInt("priority"));
+                        ticketData.setStatus (json_data.getInt("status"));
+                        ticketData.setTiDate (json_data.getString("ti_date"));
+                        ticketData.setTiEmail(json_data.getString("ti_email"));
+                        ticketData.setTiPhone(json_data.getString("ti_phone"));
                         data.add(ticketData);
                     }
 
-                    // Setup and Handover data to recyclerview
                     RecyclerView mRVFishPrice = rootView.findViewById(R.id.fishPriceList);
+                    mRVFishPrice.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
                     AdapterTicket mAdapter = new AdapterTicket(Objects.requireNonNull(getActivity()).getApplicationContext(), data);
                     mRVFishPrice.setAdapter(mAdapter);
-                    mRVFishPrice.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
                 }
-                //                    Toasty.error(Objects.requireNonNull(getActivity()).getApplicationContext(), R.string.email_input_error,Toast.LENGTH_LONG, true).show();
-
             } catch (JSONException e) {
                 Log.d(TAG, String.valueOf(e));
-//                Toasty.error(Objects.requireNonNull(getActivity()).getApplicationContext(), e.toString(), Toast.LENGTH_LONG,true).show();
+                Toasty.error(Objects.requireNonNull(getActivity()).getApplicationContext(), e.toString(), Toast.LENGTH_LONG,true).show();
             }
             mSwipeRefreshLayout.setRefreshing(false);
 
         }
 
     }
+
+
 }

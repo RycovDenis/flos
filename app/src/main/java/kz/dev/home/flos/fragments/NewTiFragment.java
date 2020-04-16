@@ -28,14 +28,9 @@ import kz.dev.home.flos.services.URLs;
 public class NewTiFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "NewTiFragment :";
     private View rootView;
-    private EditText  etTIEmail, etTIPhone,etTITitle,etTIDesc;
-    private RadioGroup radioGroup;
-    private String priority,uid,uphone;
-    private Button saveButton;
+    private String priority;
+    private String uid;
 
-    public NewTiFragment(){
-
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -46,17 +41,17 @@ public class NewTiFragment extends Fragment implements View.OnClickListener {
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             uid = bundle.getString("UID");
-            uphone = bundle.getString("uphone");
+            String uphone = bundle.getString("uphone");
         }
         return rootView;
 
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void createTicket() {
-        etTIEmail = rootView.findViewById(R.id.nt_etEmail);
-        etTIPhone = rootView.findViewById(R.id.nt_etPhone);
-        etTITitle = rootView.findViewById(R.id.nt_etTitle);
-        etTIDesc = rootView.findViewById(R.id.nt_etText);
+        EditText etTIEmail = rootView.findViewById(R.id.nt_etEmail);
+        EditText etTIPhone = rootView.findViewById(R.id.nt_etPhone);
+        EditText etTITitle = rootView.findViewById(R.id.nt_etTitle);
+        EditText etTIDesc = rootView.findViewById(R.id.nt_etText);
         final String user_email = etTIEmail.getText().toString();
         final String user_phone = etTIPhone.getText().toString();
         final String ticket_title = etTITitle.getText().toString();
@@ -115,39 +110,34 @@ public class NewTiFragment extends Fragment implements View.OnClickListener {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void createMeViev(){
     try {
-        saveButton = (Button) rootView.findViewById(R.id.nt_btnSave);
+        Button saveButton = rootView.findViewById(R.id.nt_btnSave);
         saveButton.setOnClickListener(this);
     }catch (Exception e) {
         Log.d(TAG, String.valueOf(e));
     }
 
-    radioGroup = (RadioGroup) rootView.findViewById(R.id.radioGroup);
-    radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        RadioGroup radioGroup = rootView.findViewById(R.id.radioGroup);
+    radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+        // find which radio button is selected
+        if(checkedId == R.id.prior_1) {
+            priority = "1";
+        } else if(checkedId == R.id.prior_2) {
+            priority = "2";
+        } else if(checkedId == R.id.prior_3) {
+            priority = "3";
+        }else if(checkedId == R.id.prior_4) {
+            priority = "4";
+        }else if(checkedId == R.id.prior_5) {
+            priority = "5";
 
-        @Override
-        public void onCheckedChanged(RadioGroup group, int checkedId) {
-            // find which radio button is selected
-            if(checkedId == R.id.prior_1) {
-                priority = "1";
-            } else if(checkedId == R.id.prior_2) {
-                priority = "2";
-            } else if(checkedId == R.id.prior_3) {
-                priority = "3";
-            }else if(checkedId == R.id.prior_4) {
-                priority = "4";
-            }else if(checkedId == R.id.prior_5) {
-                priority = "5";
-
-            }
         }
-
     });
     int selectedId = radioGroup.getCheckedRadioButtonId();
-    RadioButton prior_1 = (RadioButton) rootView.findViewById(R.id.prior_1);
-    RadioButton prior_2 = (RadioButton) rootView.findViewById(R.id.prior_2);
-    RadioButton prior_3 = (RadioButton) rootView.findViewById(R.id.prior_3);
-    RadioButton prior_4 = (RadioButton) rootView.findViewById(R.id.prior_4);
-    RadioButton prior_5 = (RadioButton) rootView.findViewById(R.id.prior_5);
+    RadioButton prior_1 = rootView.findViewById(R.id.prior_1);
+    RadioButton prior_2 = rootView.findViewById(R.id.prior_2);
+    RadioButton prior_3 = rootView.findViewById(R.id.prior_3);
+    RadioButton prior_4 = rootView.findViewById(R.id.prior_4);
+    RadioButton prior_5 = rootView.findViewById(R.id.prior_5);
     // find which radioButton is checked by id
     if(selectedId == prior_1.getId()) {
         priority = "1";

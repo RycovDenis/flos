@@ -65,8 +65,26 @@
     <string name="TabNumLabel">Tabel Number</string>
     <string name="CPLabel">Company post</string>
     <string name="RegionLabel">Region Location</string>
-    <string name="saveUInfo_button">save user info</string>
-    <string name="recent_code">Recent verification code</string>
+    <string name="saveUInfo_button">Save</string>
+    <string name="recent_code">Confirm</string>
+    <string name="user_id">User ID:</string>
+    <string name="e_mail">E-Mail:</string>
+    <string name="work">Phone:</string>
+    <string name="inn">INN:</string>
+    <string name="your_ip">Your IP:</string>
+    <string name="tabel_num">Tabel NUM:</string>
+    <string name="company_post">Company post:</string>
+    <string name="permited">Permited:</string>
+    <string name="date_last_password">Date last password:</string>
+    <string name="ticcket_title">Ticket: #</string>
+    <string name="account_type" translatable="false">flost_user</string>
+    <string name="success_save">Saved success</string>
+    <string name="MockString">You are only allowed plus, numbers and spaces and the phone number must be at least 5 characters long e.g. +44 3422342 234234</string>
+    <string name="MockDAte" translatable="false">2020-02-03</string>
+    <string name="_8942" translatable="false">⋮</string>
+    <string name="view_ticket">View ticket</string>
+    <string name="execute_ticket">Execute ticket</string>
+    <string name="redirect_ticket">Redirect ticket</string>
 
 
 </resources>

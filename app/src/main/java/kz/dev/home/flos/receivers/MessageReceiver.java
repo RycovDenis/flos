@@ -11,7 +11,6 @@ import es.dmoral.toasty.Toasty;
 import kz.dev.home.flos.R;
 
 public class MessageReceiver extends BroadcastReceiver {
-    private static final String TAG = "Message:";
 
     @Override
     public void onReceive(Context context, Intent intent) {

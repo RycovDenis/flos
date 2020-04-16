@@ -25,7 +25,13 @@ import kz.dev.home.flos.services.URLs;
 @SuppressLint("Registered")
 public class UIActivity extends AppCompatActivity {
     private static final String TAG = "Register:";
-    EditText editTextFName, editTextMName,editTextLName,editTextINN,editTextTabNum,editTextCP,editTextRegion;
+    private EditText editTextFName;
+    private EditText editTextMName;
+    private EditText editTextLName;
+    private EditText editTextINN;
+    private EditText editTextTabNum;
+    private EditText editTextCP;
+    private EditText editTextRegion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,10 +111,6 @@ public class UIActivity extends AppCompatActivity {
         }
         @SuppressLint("StaticFieldLeak")
         class UserInfo extends AsyncTask<Void, Void, String> {
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-            }
 
             @Override
             protected void onPostExecute(String s) {
