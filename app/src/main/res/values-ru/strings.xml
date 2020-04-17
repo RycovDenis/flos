@@ -78,4 +78,5 @@
     <string name="view_ticket">Просмотр заявки</string>
     <string name="redirect_ticket">Переадресовать заявку</string>
     <string name="execute_ticket">Исполнить завку</string>
+    <string name="logout_btn">Logout</string>
 </resources>

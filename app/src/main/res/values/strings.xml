@@ -85,6 +85,7 @@
     <string name="view_ticket">View ticket</string>
     <string name="execute_ticket">Execute ticket</string>
     <string name="redirect_ticket">Redirect ticket</string>
+    <string name="logout_btn">Logout</string>
 
 
 </resources>

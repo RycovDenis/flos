@@ -31,5 +31,4 @@ public class URLs {
     public static final String URL_TASKS= ROOT_URL+"tickets?";
     public static final String URL_NEW_TASK = ROOT_URL+"newti?";
     public static final String URL_SET_TASK = ROOT_URL+"newti?";
-
 }
