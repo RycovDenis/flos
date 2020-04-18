@@ -86,6 +86,26 @@
     <string name="execute_ticket">Execute ticket</string>
     <string name="redirect_ticket">Redirect ticket</string>
     <string name="logout_btn">Logout</string>
+    <string name="string_new_task">New task</string>
+    <string name="task_error_empty" translatable="false">Task required</string>
+    <string name="add_a_task">Add a Task</string>
+    <string name="task">Task title</string>
+    <string name="complete_the_task_on_time">Complete the task on time</string>
+    <string name="taskDescription">Task description…</string>
+    <string name="update_task">Update Task</string>
+    <string name="mark_as_finished">Mark as finished</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="completed">Completed</string>
+    <string name="not_completed">Not Completed</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="default_notification_channel_name" translatable="true">Tickets</string>
+    <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
+    <string name="fcm_message">FCM Message</string>
+    <string name="msg_subscribed" translatable="false">Subscribed to weather topic</string>
+    <string name="msg_subscribe_failed" translatable="false">Failed to subscribe to weather topic</string>
+
+
 
 
 </resources>

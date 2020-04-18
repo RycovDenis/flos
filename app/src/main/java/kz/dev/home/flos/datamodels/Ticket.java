@@ -13,22 +13,6 @@ public class Ticket {
     private Integer tiAccept;
     private String text, title, tiDate, tiEmail, tiPhone;
 
-//    public Ticket(String text, String title,String tiDate,String tiEmail,String tiPhone,
-//                  Integer userId,Integer tiId,Integer ownerId,Integer priority,Integer status,Integer tiAccept) {
-//
-//        this.text = text;
-//        this.title = title;
-//        this.tiDate = tiDate;
-//        this.tiEmail = tiEmail;
-//        this.tiPhone = tiPhone;
-//        this.userId = userId;
-//        this.tiId = tiId;
-//        this.ownerId = ownerId;
-//        this.priority = priority;
-//        this.status = status;
-//        this.tiAccept = tiAccept;
-//    }
-
     public Ticket() {
 
     }

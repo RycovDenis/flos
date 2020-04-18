@@ -7,51 +7,27 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
-
-<!--    <include-->
-<!--        layout="@layout/toolbar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent" />-->
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="@style/Toolbar"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="16dp"
-            app:srcCompat="@drawable/ic_add_circle_outline_black_24dp"
-            android:focusable="true"
-            android:layout_marginRight="16dp" />
+        <include layout="@layout/toolbar"
+            android:id="@+id/tbinclud" />
 
         <FrameLayout
             android:id="@+id/content_frame"
             android:layout_width="match_parent"
             android:layout_height="675dp"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            >
+            app:layout_constraintTop_toBottomOf="@+id/tbinclud">
 
         </FrameLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <include
+            layout="@layout/content_fab_menu"
+            tools:layout_editor_absoluteY="56dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
@@ -59,7 +35,8 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/nav_menu" >
+        app:menu="@menu/nav_menu"
+        tools:ignore="MissingConstraints">
 
     </com.google.android.material.navigation.NavigationView>
 

@@ -15,14 +15,20 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.auth0.android.jwt.Claim;
+import com.auth0.android.jwt.JWT;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URL;
 import java.util.HashMap;
 
 import es.dmoral.toasty.Toasty;
 import kz.dev.home.flos.MainActivity;
 import kz.dev.home.flos.R;
+import kz.dev.home.flos.datamodels.MyJwt;
+import kz.dev.home.flos.datamodels.URL_ch;
 import kz.dev.home.flos.services.NetworkUtil;
 import kz.dev.home.flos.services.RequestHandler;
 import kz.dev.home.flos.services.URLs;
@@ -110,9 +116,9 @@ public class LoginActivity extends AppCompatActivity {
                     if (!obj.getBoolean("error")) {
                         Toasty.info(getApplicationContext(), obj.getString("message"),Toast.LENGTH_LONG, true).show();
                         String token =  obj.getString("jwt");
-//                        String access =  obj.getString("ajwt");
+                        jwtUserParse(token);
+
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.putExtra("token", token);
                         finish();
                         startActivity(intent);
                     } else {
@@ -123,17 +129,47 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
 
+            private void jwtUserParse(String token){
+                JWT jwt = new JWT(token);
+                MyJwt myJWT = new MyJwt();
+                Claim uid = jwt.getClaim("uid");
+                Claim firstname = jwt.getClaim("firstname");
+                Claim lastname = jwt.getClaim("lastname");
+                Claim email = jwt.getClaim("email");
+                Claim role_id = jwt.getClaim("role_id");
+                Claim u_phone = jwt.getClaim("mphone");
+                Claim role_name = jwt.getClaim("role_name");
+                myJWT.setParsedValueUid( uid.asString()) ;
+                myJWT.setParsedValueFname (firstname.asString());
+                myJWT.setParsedValueLname (lastname.asString());
+                myJWT.setParsedValueEmail ( email.asString());
+                myJWT.setParsedValueUphone ( u_phone.asString());
+                myJWT.setParsedValueRoleID ( role_id.asString());
+                myJWT.setParsedValueRoleName ( role_name.asString());
+            }
+
+
             @Override
             protected String doInBackground(Void... voids) {
+                URL_ch urls = new URL_ch();
                 //creating request handler object
                 RequestHandler requestHandler = new RequestHandler();
                 //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
                 params.put("username", username);
                 params.put("password", password);
-
                 //returing the response
+                if(isSuccessPingInThread()){
+                    urls.setHOST(URLs.HOST_PRIMAR);
+                }else{
+                    urls.setHOST(URLs.HOST_SECOND);
+                }
                 return requestHandler.sendPostRequest(URLs.URL_LOGIN, params);
+
+            }
+
+            private boolean isSuccessPingInThread() {
+                return true;
             }
         }
 

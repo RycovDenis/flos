@@ -29,7 +29,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import es.dmoral.toasty.Toasty;
 import kz.dev.home.flos.R;
@@ -135,7 +134,7 @@ public class TicketsFragment extends Fragment{
             try {
                 JSONObject obj = new JSONObject(s);
                 if (!obj.getBoolean("error")) {
-                    Toasty.success(Objects.requireNonNull(getActivity()).getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG, true).show();
+                    Toasty.success(requireActivity().getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG, true).show();
                     JSONArray jArray = new JSONArray(obj.getString("tickets"));
                     for(int i=0;i<jArray.length();i++){
                         JSONObject json_data = jArray.getJSONObject(i);
@@ -154,13 +153,13 @@ public class TicketsFragment extends Fragment{
                     }
 
                     RecyclerView mRVFishPrice = rootView.findViewById(R.id.fishPriceList);
-                    mRVFishPrice.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
-                    AdapterTicket mAdapter = new AdapterTicket(Objects.requireNonNull(getActivity()).getApplicationContext(), data);
+                    mRVFishPrice.setLayoutManager(new LinearLayoutManager(requireActivity().getApplicationContext()));
+                    AdapterTicket mAdapter = new AdapterTicket(requireActivity().getApplicationContext(), data);
                     mRVFishPrice.setAdapter(mAdapter);
                 }
             } catch (JSONException e) {
                 Log.d(TAG, String.valueOf(e));
-                Toasty.error(Objects.requireNonNull(getActivity()).getApplicationContext(), e.toString(), Toast.LENGTH_LONG,true).show();
+                Toasty.error(requireActivity().getApplicationContext(), e.toString(), Toast.LENGTH_LONG,true).show();
             }
             mSwipeRefreshLayout.setRefreshing(false);
 

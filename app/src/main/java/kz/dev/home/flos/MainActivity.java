@@ -2,12 +2,19 @@ package kz.dev.home.flos;
 
 
 import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -17,35 +24,41 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.multidex.MultiDex;
 
 import com.auth0.android.jwt.Claim;
 import com.auth0.android.jwt.JWT;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
+
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import kz.dev.home.flos.datamodels.MyJwt;
 import kz.dev.home.flos.fragments.MessagesFragment;
+import kz.dev.home.flos.fragments.NewTaskFragment;
 import kz.dev.home.flos.fragments.NewTiFragment;
 import kz.dev.home.flos.fragments.ProfileFragment;
 import kz.dev.home.flos.fragments.SettingsFragment;
 import kz.dev.home.flos.fragments.TasksFragment;
 import kz.dev.home.flos.fragments.TicketsFragment;
 import kz.dev.home.flos.fragments.ToolsFragment;
+import kz.dev.home.flos.helper.SharedPrefManager;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
     private static final String TAG = "Main:";
     private boolean viewIsAtHome;
-    private String token;
-    private String parsedValueUid;
-    private String parsedValueFname;
-    private String parsedValueLname;
-    private String parsedValueEmail;
-    private String parsedValueRoleID;
-    private String parsedValueRoleName;
-    private String parsedValueUphone;
-    public static final String Secret_KEY = "144541354333adswcxs2axas24xcas1x456as47d532c4w";
     private CircleImageView circleImageView;
+    private FloatingActionButton fab_main, fabNew_ticket, fabNew_task;
+    private Animation fab_open, fab_close, fab_clock, fab_anticlock;
+    TextView textview_newti, textview_newtask;
+    Boolean isOpen = false;
 
 
 
@@ -55,14 +68,44 @@ public class MainActivity extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        jwtUserParse();
+        // add back arrow to toolbar
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
         changeTextNH();
         drawerMeVoid();
         imgMeVoid();
         fabMeVoid();
+        notfMy();
+    }
 
+    private void notfMy() {
+        // [START handle_data_extras]
+        if (getIntent().getExtras() != null) {
+            for (String key : getIntent().getExtras().keySet()) {
+                Object value = getIntent().getExtras().get(key);
+                Log.d(TAG, "Key: " + key + " Value: " + value);
+            }
+        }
+//        }else {
+            // [START retrieve_current_token]
+            FirebaseInstanceId.getInstance().getInstanceId()
+                    .addOnCompleteListener(task -> {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "getInstanceId failed", task.getException());
+                            return;
+                        }
+                        SharedPrefManager.getInstance(getApplicationContext()).saveDeviceToken(Objects.requireNonNull(task.getResult()).getToken());
+                        String token = SharedPrefManager.getInstance(this).getDeviceToken();
 
+                        // Log and toast
+                        String msg = getString(R.string.msg_token_fmt, token);
+                        Log.d(TAG, msg);
+                    });
+            // [END retrieve_current_token]
+//        }
+        MultiDex.install(this);
     }
 
     @Override
@@ -75,6 +118,9 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         displayView(id);
+        if (item.getItemId() == android.R.id.home) {
+            finish(); // close this activity and return to preview activity (if there is any)
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -97,16 +143,16 @@ public class MainActivity extends AppCompatActivity
             moveTaskToBack(true);  //If view is in News fragment, exit application
         }
     }
-    private void displayView(int viewId) {
+    public void displayView(int viewId) {
         Bundle bundle = new Bundle();
-        bundle.putString("UID", parsedValueUid);
-        bundle.putString("fname", parsedValueFname);
-        bundle.putString("lname", parsedValueLname);
-        bundle.putString("email", parsedValueEmail);
-        bundle.putString("uphone", parsedValueUphone);
-        bundle.putString("role_id", parsedValueRoleID);
-        bundle.putString("role_name", parsedValueRoleName);
-        Fragment fragment = null;
+        bundle.putString("UID", MyJwt.getParsedValueUid());
+        bundle.putString("fname", MyJwt.getParsedValueFname());
+        bundle.putString("lname", MyJwt.getParsedValueLname());
+        bundle.putString("email", MyJwt.getParsedValueEmail());
+        bundle.putString("uphone", MyJwt.getParsedValueUphone());
+        bundle.putString("role_id", MyJwt.getParsedValueRoleID());
+        bundle.putString("role_name", MyJwt.getParsedValueRoleName());
+        Fragment fragment;
         String title = getString(R.string.app_name);
 
         switch (viewId) {
@@ -146,20 +192,29 @@ public class MainActivity extends AppCompatActivity
                 title = getString(R.string.profile);
                 viewIsAtHome = false;
                 break;
-            case R.id.fab:
+            case R.id.fabNewTicket:
                 fragment = new NewTiFragment();
                 fragment.setArguments(bundle);
                 title = getString(R.string.string_new_ti);
                 viewIsAtHome = false;
                 break;
-
+            case R.id.fabNewTask:
+                fragment = new NewTaskFragment();
+                fragment.setArguments(bundle);
+                title = getString(R.string.string_new_task);
+                viewIsAtHome = false;
+                break;
+            default:
+                fragment = new TicketsFragment();
+                fragment.setArguments(bundle);
+                title  = getString(R.string.nav_menu_tickets);
+                viewIsAtHome = true;
+                break;
         }
 
-        if (fragment != null) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.content_frame, fragment);
-            ft.commit();
-        }
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content_frame, fragment);
+        ft.commit();
 
         // set the toolbar title
         if (getSupportActionBar() != null) {
@@ -177,29 +232,9 @@ public class MainActivity extends AppCompatActivity
 //        TextView navUsername = (TextView) headerView.findViewById(R.id.navUsername);
         TextView nvName = headerView.findViewById(R.id.nh_name);
         TextView nvRole = headerView.findViewById(R.id.nh_role);
-        nvName.setText(parsedValueFname + " "+parsedValueLname);
-        nvRole.setText(parsedValueRoleName);
+        nvName.setText(MyJwt.getParsedValueFname() + " "+MyJwt.getParsedValueLname());
+        nvRole.setText(MyJwt.getParsedValueRoleName());
 //        navUsername.setText("Your Text Here");
-    }
-    private void jwtUserParse(){
-        Intent intent = getIntent();
-        token = intent.getStringExtra("token");
-        assert token != null;
-        JWT jwt = new JWT(token);
-        Claim uid = jwt.getClaim("uid");
-        Claim firstname = jwt.getClaim("firstname");
-        Claim lastname = jwt.getClaim("lastname");
-        Claim email = jwt.getClaim("email");
-        Claim role_id = jwt.getClaim("role_id");
-        Claim u_phone = jwt.getClaim("mphone");
-        Claim role_name = jwt.getClaim("role_name");
-        parsedValueUid = uid.asString();
-        parsedValueFname = firstname.asString();
-        parsedValueLname = lastname.asString();
-        parsedValueEmail = email.asString();
-        parsedValueUphone = u_phone.asString();
-        parsedValueRoleID = role_id.asString();
-        parsedValueRoleName = role_name.asString();
     }
     private void drawerMeVoid(){
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -235,11 +270,68 @@ public class MainActivity extends AppCompatActivity
         });
     }
     private void fabMeVoid(){
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        fab_main = findViewById(R.id.fabShow);
+        fabNew_task = findViewById(R.id.fabNewTask);
+        fabNew_ticket = findViewById(R.id.fabNewTicket);
+        textview_newtask = findViewById(R.id.textview_ntask);
+        textview_newti = findViewById(R.id.textview_nt);
+        fab_close = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
+        fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
+        fab_clock = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_rotate_clock);
+        fab_anticlock = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_rotate_anticlock);
+
+        fab_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                displayView(R.id.fab);
+
+                if (isOpen) {
+
+                    textview_newti.setVisibility(View.INVISIBLE);
+                    textview_newtask.setVisibility(View.INVISIBLE);
+                    fabNew_task.startAnimation(fab_close);
+                    fabNew_ticket.startAnimation(fab_close);
+                    fab_main.startAnimation(fab_anticlock);
+                    fabNew_task.setClickable(false);
+                    fabNew_ticket.setClickable(false);
+                    isOpen = false;
+                } else {
+                    textview_newti.setVisibility(View.VISIBLE);
+                    textview_newtask.setVisibility(View.VISIBLE);
+                    fabNew_task.startAnimation(fab_open);
+                    fabNew_ticket.startAnimation(fab_open);
+                    fab_main.startAnimation(fab_clock);
+                    fabNew_task.setClickable(true);
+                    fabNew_ticket.setClickable(true);
+                    isOpen = true;
+                }
+
+            }
+        });
+
+        fabNew_task.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                displayView(R.id.fabNewTask);
+                textview_newti.setVisibility(View.INVISIBLE);
+                textview_newtask.setVisibility(View.INVISIBLE);
+                fabNew_task.startAnimation(fab_close);
+                fabNew_ticket.startAnimation(fab_close);
+                fab_main.startAnimation(fab_anticlock);
+                isOpen = false;
+            }
+        });
+
+//        FloatingActionButton fab = findViewById(R.id.fabNewTicket);
+        fabNew_ticket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                displayView(R.id.fabNewTicket);
+                textview_newti.setVisibility(View.INVISIBLE);
+                textview_newtask.setVisibility(View.INVISIBLE);
+                fabNew_task.startAnimation(fab_close);
+                fabNew_ticket.startAnimation(fab_close);
+                fab_main.startAnimation(fab_anticlock);
+                isOpen = false;
             }
         });
     }

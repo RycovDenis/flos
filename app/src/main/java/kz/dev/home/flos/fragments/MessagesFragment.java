@@ -11,12 +11,6 @@ import androidx.fragment.app.Fragment;
 
 import kz.dev.home.flos.R;
 
-//bundle.putString("UID", parsedValueUid);
-//        bundle.putString("fname", parsedValueFname);
-//        bundle.putString("lname", parsedValueLname);
-//        bundle.putString("email", parsedValueEmail);
-//        bundle.putString("role", parsedValueRole);
-
 public class MessagesFragment extends Fragment {
     private String uid,fname,lname,email,role,roleId;
     @SuppressLint("SetTextI18n")
@@ -35,8 +29,6 @@ public class MessagesFragment extends Fragment {
             roleId = bundle.getString("role_id");
         }
 
-       TextView tvJWT = rootView.findViewById(R.id.textView2);
-        tvJWT.setText(uid +" "+ " " + fname +" " + " "+ lname + " "+ email +" " + role + " "+ roleId);
         return rootView;
     }
 }

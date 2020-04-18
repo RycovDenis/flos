@@ -79,4 +79,17 @@
     <string name="redirect_ticket">Переадресовать заявку</string>
     <string name="execute_ticket">Исполнить завку</string>
     <string name="logout_btn">Logout</string>
+    <string name="string_new_task">Новая задача</string>
+    <string name="add_a_task">Добавить задачу</string>
+    <string name="task">Название задачи</string>
+    <string name="complete_the_task_on_time">Завершить задачу в срок</string>
+    <string name="taskDescription">Описание задания…</string>
+    <string name="update_task">Обновить задачу</string>
+    <string name="mark_as_finished">Отметить как законченный</string>
+    <string name="update">Обновить</string>
+    <string name="delete">Удалить</string>
+    <string name="completed">Завершенный</string>
+    <string name="not_completed">Не завершен</string>
+    <string name="default_notification_channel_name">Заявки</string>
+    <string name="fcm_message">FCM Message</string>
 </resources>

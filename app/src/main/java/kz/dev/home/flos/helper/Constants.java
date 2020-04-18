@@ -1,4 +1,4 @@
-package kz.dev.home.flos.services;
+package kz.dev.home.flos.helper;
 
 public class Constants {
     public static final String SHARED_PREF_NAME = "simplifiedcodingchat";
