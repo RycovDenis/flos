@@ -9,8 +9,8 @@ import kz.dev.home.flos.datamodels.URL_ch;
 public class URLs {
     public static final String HOST_PRIMAR ="http://16srb5pk.ddns.net/";
     public static final String HOST_SECOND ="http://pch38.tk/";
-    private static String HOST = URL_ch.getHOST();
-    private static final String ROOT_URL = HOST +"restdroid/";
+
+    private static final String ROOT_URL = HOST_PRIMAR +"restdroid/";
 //user management
     public static final String URL_LOGIN = ROOT_URL+"signin?";
     public static final String URL_REGISTER = ROOT_URL+"signup?" ;

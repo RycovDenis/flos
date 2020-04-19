@@ -43,7 +43,7 @@ public class NewTiFragment extends Fragment implements View.OnClickListener {
         createMeViev();
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            uid = bundle.getString("UID");
+            uid = bundle.getString("uid");
             String uphone = bundle.getString("uphone");
         }
         return rootView;

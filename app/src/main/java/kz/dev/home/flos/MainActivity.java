@@ -39,7 +39,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import kz.dev.home.flos.datamodels.MyJwt;
+import kz.dev.home.flos.datamodels.User;
 import kz.dev.home.flos.fragments.MessagesFragment;
 import kz.dev.home.flos.fragments.NewTaskFragment;
 import kz.dev.home.flos.fragments.NewTiFragment;
@@ -133,6 +133,10 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
         displayView(id);
+        if (item.getItemId() == R.id.menuLogout) {
+            finish();
+                SharedPrefManager.getInstance(getApplicationContext()).logout();
+        }
         return true;
     }
 
@@ -149,14 +153,17 @@ public class MainActivity extends AppCompatActivity
         }
     }
     public void displayView(int viewId) {
+
         Bundle bundle = new Bundle();
-        bundle.putString("UID", MyJwt.getParsedValueUid());
-        bundle.putString("fname", MyJwt.getParsedValueFname());
-        bundle.putString("lname", MyJwt.getParsedValueLname());
-        bundle.putString("email", MyJwt.getParsedValueEmail());
-        bundle.putString("uphone", MyJwt.getParsedValueUphone());
-        bundle.putString("role_id", MyJwt.getParsedValueRoleID());
-        bundle.putString("role_name", MyJwt.getParsedValueRoleName());
+        User user = SharedPrefManager.getInstance(this).getUser();
+
+        bundle.putString("uid", user.getUid());
+        bundle.putString("fname", user.getFname());
+        bundle.putString("lname", user.getLname());
+        bundle.putString("email", user.getEmail());
+        bundle.putString("uphone", user.getUphone());
+        bundle.putString("roleid", user.getRoleID());
+        bundle.putString("rolename", user.getRolename());
         Fragment fragment;
         String title = getString(R.string.app_name);
 
@@ -236,8 +243,10 @@ public class MainActivity extends AppCompatActivity
         View headerView = navigationView.getHeaderView(0);
         TextView nvName = headerView.findViewById(R.id.nh_name);
         TextView nvRole = headerView.findViewById(R.id.nh_role);
-        nvName.setText(MyJwt.getParsedValueFname() + " "+MyJwt.getParsedValueLname());
-        nvRole.setText(MyJwt.getParsedValueRoleName());
+        User user = SharedPrefManager.getInstance(this).getUser();
+
+        nvName.setText(user.getFname() + " "+ user.getLname());
+        nvRole.setText(user.getRolename());
     }
     private void drawerMeVoid(){
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -323,6 +332,7 @@ public class MainActivity extends AppCompatActivity
                 isOpen = false;
             }
         });
+//
 
 //        FloatingActionButton fab = findViewById(R.id.fabNewTicket);
         fabNew_ticket.setOnClickListener(new View.OnClickListener() {
@@ -354,8 +364,9 @@ public class MainActivity extends AppCompatActivity
     private void sendTokenToServer() {
 
         final String token = SharedPrefManager.getInstance(this).getDeviceToken();
-        final String email = MyJwt.getParsedValueEmail();
-        final String uid = MyJwt.getParsedValueUid();
+        User user = SharedPrefManager.getInstance(this).getUser();
+        final String email = user.getEmail();
+        final String uid = user.getUid();
 
         if (token == null) {
             Toast.makeText(this, "Token not generated", Toast.LENGTH_LONG).show();

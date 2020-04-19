@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import kz.dev.home.flos.R;
 
 public class MessagesFragment extends Fragment {
-    private String uid,fname,lname,email,role,roleId;
     @SuppressLint("SetTextI18n")
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -21,12 +20,12 @@ public class MessagesFragment extends Fragment {
                 false);
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            uid = bundle.getString("UID");
-            fname = bundle.getString("fname");
-            lname = bundle.getString("lname");
-            email = bundle.getString("email");
-            role = bundle.getString("role_name");
-            roleId = bundle.getString("role_id");
+            String uid = bundle.getString("UID");
+            String fname = bundle.getString("fname");
+            String lname = bundle.getString("lname");
+            String email = bundle.getString("email");
+            String role = bundle.getString("role_name");
+            String roleId = bundle.getString("role_id");
         }
 
         return rootView;
