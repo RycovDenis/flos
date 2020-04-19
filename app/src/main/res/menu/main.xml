@@ -7,4 +7,9 @@
         android:id="@+id/action_settings"
         android:title="@string/settings"
         android:icon="@drawable/ic_settings_applications_black_24dp"/>
+    <item
+        app:showAsAction="ifRoom"
+        android:id="@+id/saveTocken"
+        android:title="@string/btn_save"
+        android:icon="@drawable/ic_save_black_24dp"/>
 </menu>

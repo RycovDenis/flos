@@ -2,10 +2,6 @@ package kz.dev.home.flos;
 
 
 import android.annotation.SuppressLint;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -26,16 +22,20 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.multidex.MultiDex;
 
-import com.auth0.android.jwt.Claim;
-import com.auth0.android.jwt.JWT;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
-import com.google.firebase.messaging.FirebaseMessaging;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -49,10 +49,13 @@ import kz.dev.home.flos.fragments.TasksFragment;
 import kz.dev.home.flos.fragments.TicketsFragment;
 import kz.dev.home.flos.fragments.ToolsFragment;
 import kz.dev.home.flos.helper.SharedPrefManager;
+import kz.dev.home.flos.services.URLs;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
     private static final String TAG = "Main:";
+    private static final String STARTUP_TRACE_NAME = " Logging TraceMetric" ;
+    private static final String REQUESTS_COUNTER_NAME = "_as";
     private boolean viewIsAtHome;
     private CircleImageView circleImageView;
     private FloatingActionButton fab_main, fabNew_ticket, fabNew_task;
@@ -119,7 +122,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         displayView(id);
         if (item.getItemId() == android.R.id.home) {
-            finish(); // close this activity and return to preview activity (if there is any)
+            finish();
+        }else if(item.getItemId()==R.id.saveTocken){
+            sendTokenToServer();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -229,12 +234,10 @@ public class MainActivity extends AppCompatActivity
     private void changeTextNH(){
         NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
-//        TextView navUsername = (TextView) headerView.findViewById(R.id.navUsername);
         TextView nvName = headerView.findViewById(R.id.nh_name);
         TextView nvRole = headerView.findViewById(R.id.nh_role);
         nvName.setText(MyJwt.getParsedValueFname() + " "+MyJwt.getParsedValueLname());
         nvRole.setText(MyJwt.getParsedValueRoleName());
-//        navUsername.setText("Your Text Here");
     }
     private void drawerMeVoid(){
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -347,5 +350,42 @@ public class MainActivity extends AppCompatActivity
             }
         });
     }
+    //storing token to mysql server
+    private void sendTokenToServer() {
+
+        final String token = SharedPrefManager.getInstance(this).getDeviceToken();
+        final String email = MyJwt.getParsedValueEmail();
+        final String uid = MyJwt.getParsedValueUid();
+
+        if (token == null) {
+            Toast.makeText(this, "Token not generated", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_STORE_TOKEN,
+                response -> {
+                    try {
+                        JSONObject obj = new JSONObject(response);
+                        Toast.makeText(MainActivity.this, obj.getString("message"), Toast.LENGTH_LONG).show();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+                error -> Toast.makeText(MainActivity.this, error.getMessage(), Toast.LENGTH_LONG).show()) {
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("uid", uid);
+                params.put("email", email);
+                params.put("token", token);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+
 }
 

@@ -21,6 +21,7 @@ public class URLs {
 //admin management
     public static final String URL_ADM_GETUINFO = ROOT_URL+"getadmuinfo?";
     public static final String URL_ADM_SETUINFO = ROOT_URL+"setadmuinfo?";
+    public static final String URL_SEND_MULTIPLE_PUSH = ROOT_URL +"sendbums?";
 //chat management
     public static final String URL_STORE_TOKEN  = ROOT_URL+"storegcmtoken?";
     public static final String URL_FETCH_MESSAGES  = ROOT_URL+"messages?";

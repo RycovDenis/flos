@@ -98,7 +98,7 @@
     <string name="delete">Delete</string>
     <string name="completed">Completed</string>
     <string name="not_completed">Not Completed</string>
-    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="default_notification_channel_id" translatable="false">Tickets</string>
     <string name="default_notification_channel_name" translatable="true">Tickets</string>
     <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
     <string name="fcm_message">FCM Message</string>
