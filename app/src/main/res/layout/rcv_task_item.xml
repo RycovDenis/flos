@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_task"
@@ -9,49 +12,48 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
-        android:layout_marginBottom="3dp">
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="7dp">
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textViewStatus"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:text="@string/completed"
-                android:gravity="center"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:textColor="@color/defaultTextColor"
-                android:textStyle="bold" />
+                android:orientation="vertical"
+                tools:ignore="UselessParent">
+
+                <TextView
+                    android:id="@+id/textViewStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textViewTask"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Go Bring Eggs"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline" />
+                android:layout_marginTop="16dp" />
 
             <TextView
                 android:id="@+id/textViewDesc"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Bring 6 eggs from super market"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/textViewFinishBy"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="5pm today"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
-
-
+                android:layout_height="wrap_content" />
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,6 @@ public class Ticket {
     private Integer tiId;
     private Integer priority;
     private Integer status;
-    private Integer tiAccept;
     private String text, title, tiDate, tiEmail, tiPhone;
 
     public Ticket() {

@@ -1,4 +1,4 @@
-package kz.dev.home.flos.helper;
+package kz.dev.home.flos.notifications;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -54,9 +54,9 @@ public class MyNotificationManager {
         PendingIntent resultPendingIntent =
                 PendingIntent.getActivity(
                         mCtx,
-                        ID_BIG_NOTIFICATION,
+                        0,
                         intent,
-                        PendingIntent.FLAG_ONE_SHOT
+                        PendingIntent.FLAG_IMMUTABLE
                 );
         channelId = mCtx.getString(R.string.default_notification_channel_id);
         NotificationCompat.BigPictureStyle bigPictureStyle = new NotificationCompat.BigPictureStyle();
@@ -88,19 +88,20 @@ public class MyNotificationManager {
             notificationManager.createNotificationChannel(channel);
         }
         assert notificationManager != null;
-        notificationManager.notify(ID_BIG_NOTIFICATION, notification);
+        notificationManager.notify(0, notification);
     }
 
     //the method will show a small notification
     //parameters are title for message title, message for message text and an intent that will open
     //when you will tap on the notification
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void showSmallNotification(String title, String message, Intent intent) {
         PendingIntent resultPendingIntent =
                 PendingIntent.getActivity(
                         mCtx,
                         ID_SMALL_NOTIFICATION,
                         intent,
-                        PendingIntent.FLAG_ONE_SHOT
+                        PendingIntent.FLAG_IMMUTABLE
                 );
 
         channelId = mCtx.getString(R.string.default_notification_channel_id);
@@ -131,7 +132,8 @@ public class MyNotificationManager {
         notificationManager.notify(ID_SMALL_NOTIFICATION, notification);
     }
 
-    public void sendNotification(String title, String message,Intent intent) {
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void sendNotification(String title, String message, Intent intent) {
 //        Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent =
@@ -139,7 +141,8 @@ public class MyNotificationManager {
                         mCtx,
                         0 /* Request code */,
                         intent,
-                PendingIntent.FLAG_ONE_SHOT);
+                        PendingIntent.FLAG_IMMUTABLE
+                );
         channelId = mCtx.getString(R.string.default_notification_channel_id);
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);

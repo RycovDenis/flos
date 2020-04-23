@@ -32,7 +32,7 @@ public class NewTiFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "NewTiFragment :";
     private View rootView;
     private String priority;
-    private String uid;
+    private String uid,uphone,email;
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -44,19 +44,20 @@ public class NewTiFragment extends Fragment implements View.OnClickListener {
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             uid = bundle.getString("uid");
-            String uphone = bundle.getString("uphone");
+             uphone = bundle.getString("uphone");
+             email = bundle.getString("email");
         }
         return rootView;
 
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void createTicket() {
-        EditText etTIEmail = rootView.findViewById(R.id.nt_etEmail);
-        EditText etTIPhone = rootView.findViewById(R.id.nt_etPhone);
+//        EditText etTIEmail = rootView.findViewById(R.id.nt_etEmail);
+//        EditText etTIPhone = rootView.findViewById(R.id.nt_etPhone);
         EditText etTITitle = rootView.findViewById(R.id.nt_etTitle);
         EditText etTIDesc = rootView.findViewById(R.id.nt_etText);
-        final String user_email = etTIEmail.getText().toString();
-        final String user_phone = etTIPhone.getText().toString();
+        final String user_email = uphone;
+        final String user_phone = email;
         final String ticket_title = etTITitle.getText().toString();
         final String ticket_description = etTIDesc.getText().toString();
         final String priority_ti = priority;

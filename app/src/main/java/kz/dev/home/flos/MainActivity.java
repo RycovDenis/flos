@@ -2,7 +2,14 @@ package kz.dev.home.flos;
 
 
 import android.annotation.SuppressLint;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Telephony;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -34,13 +42,17 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import kz.dev.home.flos.datamodels.Sms;
 import kz.dev.home.flos.datamodels.User;
-import kz.dev.home.flos.fragments.MessagesFragment;
+import kz.dev.home.flos.fragments.DashboardFragment;
 import kz.dev.home.flos.fragments.NewTaskFragment;
 import kz.dev.home.flos.fragments.NewTiFragment;
 import kz.dev.home.flos.fragments.ProfileFragment;
@@ -64,8 +76,8 @@ public class MainActivity extends AppCompatActivity
     Boolean isOpen = false;
 
 
-
-    @SuppressLint("SetTextI18n")
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @SuppressLint({"SetTextI18n", "CommitTransaction"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -75,6 +87,9 @@ public class MainActivity extends AppCompatActivity
         if (getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+        if (savedInstanceState == null) {
+            displayView(R.id.hbt);
         }
         changeTextNH();
         drawerMeVoid();
@@ -147,7 +162,7 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         }
         if (!viewIsAtHome) { //if the current view is not the News fragment
-            displayView(R.id.nav_tickets); //display the News fragment
+            displayView(R.id.hbt); //display the News fragment
         } else {
             moveTaskToBack(true);  //If view is in News fragment, exit application
         }
@@ -165,19 +180,13 @@ public class MainActivity extends AppCompatActivity
         bundle.putString("roleid", user.getRoleID());
         bundle.putString("rolename", user.getRolename());
         Fragment fragment;
-        String title = getString(R.string.app_name);
+        String title = getString(R.string.title_dashboard);
 
         switch (viewId) {
             case R.id.nav_tickets:
                 fragment = new TicketsFragment();
                 fragment.setArguments(bundle);
                 title  = getString(R.string.nav_menu_tickets);
-                viewIsAtHome = true;
-                break;
-            case R.id.nav_messages:
-                fragment = new MessagesFragment();
-                fragment.setArguments(bundle);
-                title = getString(R.string.nav_menu_message);
                 viewIsAtHome = false;
                 break;
             case R.id.nav_tasks:
@@ -217,9 +226,9 @@ public class MainActivity extends AppCompatActivity
                 viewIsAtHome = false;
                 break;
             default:
-                fragment = new TicketsFragment();
+                fragment = new DashboardFragment();
                 fragment.setArguments(bundle);
-                title  = getString(R.string.nav_menu_tickets);
+                title = getString(R.string.title_dashboard);
                 viewIsAtHome = true;
                 break;
         }
@@ -396,7 +405,6 @@ public class MainActivity extends AppCompatActivity
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
-
 
 }
 

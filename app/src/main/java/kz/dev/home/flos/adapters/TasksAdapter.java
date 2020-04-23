@@ -66,6 +66,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TasksViewHol
 
         TextView textViewStatus, textViewTask, textViewDesc, textViewFinishBy;
         CardView cardViewTask;
+
         TasksViewHolder(View itemView) {
             super(itemView);
             cardViewTask = itemView.findViewById(R.id.cv_task);
@@ -81,7 +82,6 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TasksViewHol
         @Override
         public void onClick(View view) {
             Task task = taskList.get(getAdapterPosition());
-
             Intent intent = new Intent(mCtx.getApplicationContext(), UpdateTaskActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("task", task);

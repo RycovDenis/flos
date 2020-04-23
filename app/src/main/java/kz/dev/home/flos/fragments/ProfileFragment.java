@@ -57,8 +57,8 @@ public class ProfileFragment extends Fragment {
                 false);
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            uid = bundle.getString("UID");
-            role = bundle.getString("role_name");
+            uid = bundle.getString("uid");
+            role = bundle.getString("rolename");
         }
         getUserInfo();
         getTextViews();

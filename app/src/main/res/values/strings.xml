@@ -104,8 +104,20 @@
     <string name="fcm_message">FCM Message</string>
     <string name="msg_subscribed" translatable="false">Subscribed to weather topic</string>
     <string name="msg_subscribe_failed" translatable="false">Failed to subscribe to weather topic</string>
-
-
+    <string name="status_open">Opened</string>
+    <string name="status_process">Processed</string>
+    <string name="status_redirected">Redirected</string>
+    <string name="status_closed">Cosed</string>
+    <string name="status_1">Open</string>
+    <string name="status_2">Process</string>
+    <string name="status_3">Redirect</string>
+    <string name="status_4">Close</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="label_priority">Priority</string>
+    <string name="label_status">Status</string>
+    <string name="label_date">Created</string>
+    <string name="label_uphone">Phone</string>
+    <string name="label_email">Email</string>
 
 
 </resources>

@@ -1,13 +1,10 @@
 package kz.dev.home.flos.services;
 
-import android.annotation.SuppressLint;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
@@ -19,13 +16,12 @@ import androidx.core.app.NotificationCompat;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import kz.dev.home.flos.MainActivity;
 import kz.dev.home.flos.R;
-import kz.dev.home.flos.helper.MyNotificationManager;
+import kz.dev.home.flos.notifications.MyNotificationManager;
 import kz.dev.home.flos.helper.SharedPrefManager;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {

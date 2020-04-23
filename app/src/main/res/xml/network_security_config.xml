@@ -3,6 +3,6 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">16srb5pk.ddns.net</domain>
         <domain includeSubdomains="true">pch38.tk</domain>
-
+        <domain includeSubdomains="true">10.0.2.2</domain>
     </domain-config>
 </network-security-config>

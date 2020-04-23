@@ -92,4 +92,18 @@
     <string name="not_completed">Не завершен</string>
     <string name="default_notification_channel_name">Заявки</string>
     <string name="fcm_message">FCM Message</string>
+    <string name="status_open">Открытые</string>
+    <string name="status_process">Обработка</string>
+    <string name="status_redirected">Пересылка</string>
+    <string name="status_closed">Закрытые</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="status_1">Открыта</string>
+    <string name="status_2">В обработке</string>
+    <string name="status_3">Переадресована</string>
+    <string name="status_4">Закрыта</string>
+    <string name="label_priority" translatable="false">Прторитет</string>
+    <string name="label_status">Статус</string>
+    <string name="label_date">Создана</string>
+    <string name="label_email">Email</string>
+    <string name="label_uphone">Телефон</string>
 </resources>

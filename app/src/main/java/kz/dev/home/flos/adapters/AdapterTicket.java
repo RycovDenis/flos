@@ -7,7 +7,6 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,16 +16,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import kz.dev.home.flos.R;
 import kz.dev.home.flos.datamodels.Ticket;
 
 public class AdapterTicket extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
-    private final Context context;
-    private final LayoutInflater inflater;
-
-    private List<Ticket> data;
+    private final Context mCtx;
+    private List<Ticket> ticketList;
 
     private final int blockedColorValue = Color.parseColor("#D30000");
     private final int criticalColorValue = Color.parseColor("#FF2800");
@@ -34,19 +29,16 @@ public class AdapterTicket extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private final int middleColorValue = Color.parseColor("#00B8D4");
     private final int lowerColorValue = Color.parseColor("#64DD17");
 
-
-
-    public AdapterTicket(Context context, List<Ticket> data){
-        this.context = context;
-        inflater = LayoutInflater.from(context);
-        this.data = data;
+    public AdapterTicket(Context mCtx, List<Ticket> ticketList){
+        this.mCtx = mCtx;
+        this.ticketList = ticketList;
     }
 
     // Inflate the layout when viewholder created
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.rowlayout, parent,false);
+        View view=LayoutInflater.from(mCtx).inflate(R.layout.cards_layout, parent,false);
         return new MyHolder(view);
     }
 
@@ -56,98 +48,91 @@ public class AdapterTicket extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyHolder myHolder= (MyHolder) holder;
-        Ticket current=data.get(position);
-        myHolder.texttitle.setText("# "+ current.getTiId()+"  " + current.getTitle());
-        myHolder.textDesc.setText(current.getText());
-        switch (current.getPriority()){
+        Ticket tl=ticketList.get(position);
+        String priortyLabel = mCtx.getResources().getString(R.string.label_priority);
+        String statusLabel =  mCtx.getResources().getString(R.string.label_status);
+        String dateLabel =  mCtx.getResources().getString(R.string.label_date);
+        String uphoneLabel =  mCtx.getResources().getString(R.string.label_uphone);
+        String emailLabel =  mCtx.getResources().getString(R.string.label_email);
+
+        myHolder.textTiIDTitle.setText("# "+ tl.getTiId().toString()+" "+tl.getTitle());
+        myHolder.textDesc.setText(tl.getText());
+        myHolder.textTiDate.setText(dateLabel+": " + tl.getTiDate());
+        myHolder.textTiUphone.setText(uphoneLabel+": " + tl.getTiPhone());
+        myHolder.textTiUphone.setVisibility(View.GONE);
+        myHolder.textUserEmail.setText(emailLabel+": " + tl.getTiEmail());
+        myHolder.textUserEmail.setVisibility(View.GONE);
+        myHolder.textUserFullNamw.setText("#");
+        myHolder.textUserFullNamw.setVisibility(View.GONE);
+
+
+        switch (tl.getPriority()){
             case 1:
-                myHolder.ivTiStatusPriority.setBorderColor(blockedColorValue);
+                myHolder.tvTiPriority.setTextColor(blockedColorValue);
+                myHolder.tvTiPriority.setText(priortyLabel +": "+mCtx.getResources().getString(R.string.prior_1));
                 break;
             case 2:
-                myHolder.ivTiStatusPriority.setBorderColor(criticalColorValue);
+                myHolder.tvTiPriority.setTextColor(criticalColorValue);
+                myHolder.tvTiPriority.setText(priortyLabel +": "+mCtx.getResources().getString(R.string.prior_2));
                 break;
             case 3:
-                myHolder.ivTiStatusPriority.setBorderColor(hightColorValue);
+                myHolder.tvTiPriority.setTextColor(hightColorValue);
+                myHolder.tvTiPriority.setText(priortyLabel +": "+mCtx.getResources().getString(R.string.prior_3));
                 break;
             case 4:
-                myHolder.ivTiStatusPriority.setBorderColor(middleColorValue);
+                myHolder.tvTiPriority.setTextColor(middleColorValue);
+                myHolder.tvTiPriority.setText(priortyLabel +": "+mCtx.getResources().getString(R.string.prior_4));
                 break;
             case 5:
-                myHolder.ivTiStatusPriority.setBorderColor(lowerColorValue);
+                myHolder.tvTiPriority.setTextColor(lowerColorValue);
+                myHolder.tvTiPriority.setText(priortyLabel +": "+mCtx.getResources().getString(R.string.prior_5));
                 break;
         }
-        switch (current.getStatus()){
+        switch (tl.getStatus()){
             case 1:
-                myHolder.ivTiStatusPriority.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_icon_new, context.getApplicationContext().getTheme()));
+                myHolder.tvTiStatus.setText(statusLabel + ": " +mCtx.getResources().getString(R.string.status_1));
                 break;
             case 2:
-                myHolder.ivTiStatusPriority.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_icon_process, context.getApplicationContext().getTheme()));
+                myHolder.tvTiStatus.setText(statusLabel + ": " +mCtx.getResources().getString(R.string.status_2));
                 break;
             case 3:
-                myHolder.ivTiStatusPriority.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_icon_return, context.getApplicationContext().getTheme()));
+                myHolder.tvTiStatus.setText(statusLabel + ": " +mCtx.getResources().getString(R.string.status_3));
                 break;
             case 4:
-                myHolder.ivTiStatusPriority.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_icon_success, context.getApplicationContext().getTheme()));
+                myHolder.tvTiStatus.setText(statusLabel + ": " +mCtx.getResources().getString(R.string.status_4));
                 break;
         }
-
-        myHolder.textTiDate.setText(current.getTiDate());
-        myHolder.buttonViewOption.setOnClickListener(v -> {
-            PopupMenu popupMenu = new PopupMenu(AdapterTicket.this.context, v);
-            popupMenu.getMenuInflater().inflate(R.menu.ticket_menu, popupMenu.getMenu());
-            popupMenu.show();
-            popupMenu.setOnMenuItemClickListener(item -> {
-                switch (item.getItemId()) {
-                    case R.id.menu_vwt:
-                        //handle menu1 click
-                        break;
-                    case R.id.menu_act:
-                        //handle menu2 click
-                        break;
-                    case R.id.menu_rjt:
-                        //handle menu3 click
-                        break;
-                }
-                return false;
-            });
-        });
     }
 
     // return total item from List
     @Override
     public int getItemCount() {
-        return data.size();
+        return ticketList.size();
     }
 
     static class MyHolder extends RecyclerView.ViewHolder{
 
-        final TextView texttitle;
-        final TextView textDesc;
+        final TextView textTiIDTitle;
+        final TextView  textDesc;
         final TextView textTiDate;
+        final TextView tvTiPriority;
+        final TextView tvTiStatus;
+        final TextView textTiUphone;
+        final TextView textUserEmail;
+        final TextView textUserFullNamw;
         final CardView cvTicket;
-        final CircleImageView ivTiStatusPriority;
-        final TextView buttonViewOption;
-
-//        final TextView textTiID;
-//        final TextView textUserEmail;
-//        final TextView textUserPhone;
-
-        // create constructor to get widget reference
         MyHolder(View itemView) {
             super(itemView);
-//            textTiID = itemView.findViewById(R.id.text_id);
-            texttitle= itemView.findViewById(R.id.text_title);
-            textDesc= itemView.findViewById(R.id.text_desc);
-            cvTicket = itemView.findViewById(R.id.card_view_ticket);
-            ivTiStatusPriority = itemView.findViewById(R.id.iv_ti_status_priority);
-            textTiDate = itemView.findViewById(R.id.text_date);
-            buttonViewOption = itemView.findViewById(R.id.textViewOptions);
-//            textUserEmail = itemView.findViewById(R.id.text_user_email);
-//            textUserPhone = itemView.findViewById(R.id.text_user_phone);
-
-
+            textTiIDTitle = itemView.findViewById(R.id.tv_tivIDTitle);
+            textDesc= itemView.findViewById(R.id.tv_tivDesc);
+            cvTicket = itemView.findViewById(R.id.cvTicket);
+            tvTiPriority = itemView.findViewById(R.id.tv_tivPriority);
+            tvTiStatus = itemView.findViewById(R.id.tv_tivStatus);
+            textTiDate = itemView.findViewById(R.id.tv_tivDate);
+            textTiUphone = itemView.findViewById(R.id.tv_tivuPhone);
+            textUserEmail = itemView.findViewById(R.id.tv_tivEmail);
+            textUserFullNamw = itemView.findViewById(R.id.tv_tivFullName);
         }
-
     }
 
 }
