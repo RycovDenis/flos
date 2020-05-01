@@ -3,10 +3,12 @@ package kz.dev.home.flos.activitys;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
@@ -65,6 +67,7 @@ public class SMSVerifyActivity extends AppCompatActivity {
                 }
             }
 
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             protected String doInBackground(Void... voids) {
                 RequestHandler requestHandler = new RequestHandler();

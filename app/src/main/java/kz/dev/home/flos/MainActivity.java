@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.Telephony;
 import android.util.Log;
 import android.view.Menu;
@@ -24,6 +25,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.FileProvider;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -42,6 +44,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -50,6 +53,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import kz.dev.home.flos.activitys.UpdateActivity;
 import kz.dev.home.flos.datamodels.Sms;
 import kz.dev.home.flos.datamodels.User;
 import kz.dev.home.flos.fragments.DashboardFragment;
@@ -87,6 +91,7 @@ public class MainActivity extends AppCompatActivity
         if (getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
+            Objects.requireNonNull(getActionBar()).setTitle(R.string.title_dashboard);
         }
         if (savedInstanceState == null) {
             displayView(R.id.hbt);
@@ -140,7 +145,9 @@ public class MainActivity extends AppCompatActivity
             finish();
         }else if(item.getItemId()==R.id.saveTocken){
             sendTokenToServer();
-        }
+        }else if(item.getItemId()==R.id.updateApp){
+            Intent i = new Intent(this, UpdateActivity.class);
+            startActivity(i);        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -405,6 +412,22 @@ public class MainActivity extends AppCompatActivity
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
+    private void updateApp(){
+        String root = Environment.getExternalStorageDirectory().toString();
+
+        Uri fileUri24 = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", new File(root + "/tmp.apk"));
+        Uri fileUri = Uri.fromFile(new File(root + "/tmp.apk"));
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        if (Build.VERSION.SDK_INT >= 24)
+            intent.setDataAndType(fileUri24, "application/vnd.android.package-archive");
+        else intent.setDataAndType(fileUri, "application/vnd.android.package-archive");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        this.startActivity(intent);
+    }
 
 }
+
+
 

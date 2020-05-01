@@ -3,12 +3,14 @@ package kz.dev.home.flos.activitys;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
@@ -131,6 +133,7 @@ public class UIActivity extends AppCompatActivity {
                 }
             }
 
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             protected String doInBackground(Void... voids) {
                 RequestHandler requestHandler = new RequestHandler();
@@ -144,7 +147,7 @@ public class UIActivity extends AppCompatActivity {
                 params.put("ucp", u_cp);
                 params.put("uregion", u_region);
                 params.put("uphone",u_phone);
-                return requestHandler.sendPostRequest(URLs.URL_SETUINFO, params);
+                return requestHandler.sendPutRequest(URLs.URL_SETUINFO, params);
             }
         }
         UserInfo ui = new UserInfo();

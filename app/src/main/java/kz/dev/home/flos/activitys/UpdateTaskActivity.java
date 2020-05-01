@@ -5,12 +5,16 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NavUtils;
 
 import kz.dev.home.flos.MainActivity;
 import kz.dev.home.flos.R;
@@ -28,6 +32,15 @@ public class UpdateTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_task);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_fast_rewind_black_24dp);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                finish();
+            }
+        });
 
         editTextTask = findViewById(R.id.editTextTask);
         editTextDesc = findViewById(R.id.editTextDesc);
@@ -59,6 +72,28 @@ public class UpdateTaskActivity extends AppCompatActivity {
             ad.show();
         });
     }
+
+    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        int id = item.getItemId();
+//        if (id == android.R.id.home) {// app icon in action bar clicked; go home
+//            Intent intent = new Intent(this, MainActivity.class);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            startActivity(intent);
+//            finish();
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
+public boolean onOptionsItemSelected(MenuItem item) {
+    // Respond to the action bar's Up/Home button
+    if (item.getItemId() == android.R.id.home) {
+        NavUtils.navigateUpFromSameTask(this);
+        return true;
+    }
+    return super.onOptionsItemSelected(item);
+}
+
 
     private void loadTask(Task task) {
         editTextTask.setText(task.getTask());

@@ -19,8 +19,6 @@ import kz.dev.home.flos.datamodels.User;
 import kz.dev.home.flos.helper.SharedPrefManager;
 
 public class DashboardFragment extends Fragment {
-    private View rootView;
-    private CardView cvOpened,cvClosed,cvProcessed,cvRedirected;
     @SuppressLint("SetTextI18n")
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -36,32 +34,10 @@ public class DashboardFragment extends Fragment {
             String role = bundle.getString("role_name");
             String roleId = bundle.getString("role_id");
         }
-        initViews();
-        oncCLkListener();
         return rootView;
     }
 
-    private void oncCLkListener() {
-        assert getFragmentManager() != null;
-        FragmentTransaction ftrans = getFragmentManager().beginTransaction();
-        if (item == 1) {
-            ftrans.replace(R.id.container, fglavnaya);
-
-        } else if (item == 2) {
-            ftrans.replace(R.id.container, fMusey);
-
-        } else if (item == 3) {
-            ftrans.replace(R.id.container, fvistavki);
-
-        }ftrans.commit();
-    }
 
 
 
-    private void initViews() {
-        cvOpened = rootView.findViewById(R.id.cv_openedID);
-        cvClosed = rootView.findViewById(R.id.cv_closedID);
-        cvProcessed = rootView.findViewById(R.id.cv_procesedID);
-        cvRedirected = rootView.findViewById(R.id.cv_redirectedID);
-    }
 }

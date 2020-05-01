@@ -116,7 +116,7 @@ public class ProfileFragment extends Fragment {
                     if (!obj.getBoolean("error")) {
                         Toasty.info(Objects.requireNonNull(getActivity()).getApplicationContext(), obj.getString("message"),Toast.LENGTH_LONG, true).show();
 
-                        String str = obj.getString("uinfo");
+                        String str = obj.getString("jwt");
                         JWT jwt = new JWT(str);
                         Claim email = jwt.getClaim("email");
                         Claim username = jwt.getClaim("username");
@@ -126,7 +126,8 @@ public class ProfileFragment extends Fragment {
                         Claim mname = jwt.getClaim("m_name");
                         Claim uinn = jwt.getClaim("inn");
                         Claim uphone = jwt.getClaim("mobile_phone");
-                        Claim uip = jwt.getClaim("INET_NTOA(ip)");
+//                        Claim uip = jwt.getClaim("INET_NTOA(ip)");
+//                        Claim uip = jwt.getClaim("INET_NTOA(ip)");
                         Claim utabnum = jwt.getClaim("tab_num");
                         Claim ucp = jwt.getClaim("company_post");
                         Claim uregion = jwt.getClaim("region");
@@ -140,7 +141,8 @@ public class ProfileFragment extends Fragment {
                         parsedValueMname = mname.asString();
                         parsedValueUINN = uinn.asString();
                         parsedValueUphone = uphone.asString();
-                        parsedValueUip = uip.asString();
+//                        parsedValueUip = uip.asString();
+                        parsedValueUip = "0.0.0.0";
                         parsedValueUTabNum = utabnum.asString();
                         parsedValueUCP = ucp.asString();
                         parsedValueUregion = uregion.asString();

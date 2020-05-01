@@ -12,4 +12,9 @@
         android:id="@+id/saveTocken"
         android:title="@string/btn_save"
         android:icon="@drawable/ic_save_black_24dp"/>
+    <item
+        app:showAsAction="ifRoom"
+        android:id="@+id/updateApp"
+        android:title="Updates"
+        android:icon="@drawable/ic_icon_return"/>
 </menu>

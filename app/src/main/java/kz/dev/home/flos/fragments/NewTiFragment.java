@@ -81,9 +81,9 @@ public class NewTiFragment extends Fragment implements View.OnClickListener {
                     JSONObject obj = new JSONObject(s);
                     //if no error in response
                     if (!obj.getBoolean("error")) {
-                        Toasty.info(Objects.requireNonNull(getActivity()).getApplicationContext(), obj.getString("message")+" ticket id:"+obj.getString("result"), Toast.LENGTH_LONG, true).show();
+                        Toasty.info(requireActivity().getApplicationContext(), obj.getString("message")+" ticket id:"+obj.getString("result"), Toast.LENGTH_LONG, true).show();
                     } else {
-                        Toasty.error(Objects.requireNonNull(getActivity()).getApplicationContext(), R.string.email_input_error,Toast.LENGTH_LONG, true).show();
+                        Toasty.error(requireActivity().getApplicationContext(), R.string.email_input_error,Toast.LENGTH_LONG, true).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
